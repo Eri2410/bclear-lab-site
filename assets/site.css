@@ -217,8 +217,7 @@ strong,b{font-weight:600}
 .hero h1 em{font-style:normal;color:var(--mint-deep)}
 .hero .lead{margin-top:18px;max-width:46ch;font-size:clamp(1rem,1.25vw,1.12rem)}
 .hero .btn-row{margin-top:26px}
-.hero-note{margin-top:16px;display:flex;align-items:flex-start;gap:9px;color:var(--ink-3);font-size:.83rem;max-width:60ch}
-.hero-note span,.hero-note{text-wrap:balance}
+.hero-note{margin-top:16px;display:flex;align-items:flex-start;gap:9px;color:var(--ink-3);font-size:.83rem}
 .hero-title,.hero-lead{text-wrap:pretty}
 .hero-note svg{width:16px;height:16px;flex:none;color:var(--mint-deep);margin-top:3px}
 
@@ -436,11 +435,13 @@ form[data-sent="true"] .form-live{display:none}
   .readout-bar i{transition:transform 1.1s cubic-bezier(.16,1,.3,1)}
   @keyframes rise{from{opacity:.001;transform:translateY(14px)}to{opacity:1;transform:none}}
 
-  .scan-sweep{animation:sweep 2.6s cubic-bezier(.5,0,.5,1) .5s 1 both}
+  /* 6s cycle: the sweep runs for 2.6s, then rests off-screen until the next pass */
+  .scan-sweep{animation:sweep 6s cubic-bezier(.5,0,.5,1) .5s infinite both}
   @keyframes sweep{
     0%{transform:translateY(-150px);opacity:0}
-    12%{opacity:1}
-    82%{opacity:1}
+    5%{opacity:1}
+    36%{opacity:1}
+    44%{transform:translateY(150px);opacity:0}
     100%{transform:translateY(150px);opacity:0}
   }
 }
