@@ -22,6 +22,7 @@
 
   --line:#E0E0EA;
   --line-2:#CDCDDB;
+  --warn:#E5384A;
 
   --r-lg:22px;
   --r-md:14px;
@@ -81,7 +82,7 @@ h1,h2,h3,h4{
   margin:0;
   text-wrap:balance;
 }
-h1{font-size:clamp(2.35rem,5.6vw,3.7rem);letter-spacing:-.032em;font-weight:600;line-height:1.04}
+h1{font-size:clamp(2.2rem,4.6vw,3.4rem);letter-spacing:-.032em;font-weight:600;line-height:1.05}
 h2{font-size:clamp(1.85rem,3.8vw,2.8rem);letter-spacing:-.028em;line-height:1.07}
 h3{font-size:clamp(1.18rem,1.6vw,1.4rem);line-height:1.22}
 h4{font-size:1.06rem;line-height:1.28;letter-spacing:-.014em}
@@ -207,13 +208,13 @@ strong,b{font-weight:600}
 }
 
 /* ---- hero ---- */
-.hero{padding-block:clamp(30px,4.2vw,58px) clamp(16px,1.4vw,20px)}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:clamp(28px,4vw,60px);align-items:center}
+.hero{padding-block:clamp(20px,2.4vw,32px) clamp(12px,1vw,14px)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(26px,3.4vw,52px);align-items:center}
 @media (max-width:940px){.hero-grid{grid-template-columns:minmax(0,1fr)}}
 .hero h1 em{font-style:normal;color:var(--mint-deep)}
-.hero .lead{margin-top:20px;max-width:50ch;font-size:clamp(1rem,1.25vw,1.12rem)}
-.hero .btn-row{margin-top:30px}
-.hero-note{margin-top:19px;display:flex;align-items:flex-start;gap:9px;color:var(--ink-3);font-size:.83rem;max-width:52ch}
+.hero .lead{margin-top:18px;max-width:46ch;font-size:clamp(1rem,1.25vw,1.12rem)}
+.hero .btn-row{margin-top:26px}
+.hero-note{margin-top:16px;display:flex;align-items:flex-start;gap:9px;color:var(--ink-3);font-size:.83rem;max-width:52ch}
 .hero-note svg{width:16px;height:16px;flex:none;color:var(--mint-deep);margin-top:3px}
 
 /* ---- feature list ---- */
@@ -358,53 +359,65 @@ form[data-sent="true"] .form-live{display:none}
 
 /* ---- authored moment: hero panel ---- */
 .hero-panel{
-  background:#fff;border-radius:26px;padding:clamp(20px,2.2vw,26px);
+  background:#fff;border-radius:26px;padding:clamp(18px,2vw,22px);
   box-shadow:var(--shadow-md);position:relative;
 }
-.hero-panel-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px}
+.hero-panel-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:13px}
 .hero-panel-head strong{font-family:var(--f-display);font-weight:600;font-size:.98rem}
-.scan{display:block;width:100%;height:auto;border-radius:18px;background:var(--ground)}
-/* the sweep exists only as motion; without it there is no stray line */
-.scan-sweep{opacity:0}
+
+.hero-shot{position:relative;margin:0;line-height:0;border-radius:16px;overflow:hidden;background:var(--ground-deep)}
+.hero-shot img{display:block;width:100%;height:auto}
+.hero-marks{position:absolute;inset:0;width:100%;height:100%}
+
 .scan-legend{
-  margin-top:10px;display:flex;flex-wrap:wrap;gap:6px 20px;
-  font-size:.78rem;color:var(--ink-3);
+  position:absolute;left:12px;bottom:12px;
+  display:flex;flex-wrap:wrap;gap:4px 16px;
+  margin:0;padding:7px 13px;border-radius:999px;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  font-size:.76rem;line-height:1.4;color:var(--ink-2);
+  box-shadow:0 1px 2px rgba(20,20,45,.08),0 6px 16px rgba(20,20,45,.10);
 }
 .scan-legend span{display:inline-flex;align-items:center;gap:8px}
 .scan-legend i{display:block;width:20px;height:0;flex:none}
-.scan-legend .k-solid{border-top:2.5px solid var(--ink)}
-.scan-legend .k-dash{border-top:2.5px dashed var(--mint-deep)}
-.hero-readout{margin-top:16px;display:grid;gap:9px}
-.readout-row{display:grid;grid-template-columns:auto 1fr auto;gap:13px;align-items:center;font-size:.9rem}
+.scan-legend .k-now{border-top:3px solid var(--warn)}
+.scan-legend .k-goal{border-top:3px dashed var(--mint-deep)}
+
+.hero-readout{margin-top:13px;display:grid;gap:8px}
+.readout-row{display:grid;grid-template-columns:auto 1fr auto;gap:13px;align-items:center;font-size:.88rem}
 .readout-row .k{color:var(--ink-2)}
 .readout-bar{height:7px;border-radius:99px;background:var(--ground-deep);overflow:hidden}
 .readout-bar i{display:block;height:100%;width:100%;border-radius:99px;background:var(--mint-deep);transform:scaleX(0);transform-origin:left center}
 .readout-row .v{font-weight:600;font-variant-numeric:tabular-nums;color:var(--ink);min-width:3.4em;text-align:right}
+
 .hero-verdict{
-  margin-top:16px;background:var(--mint-soft);border-radius:var(--r-md);
-  padding:14px 17px;display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;
+  margin-top:13px;background:var(--mint-soft);border-radius:var(--r-md);
+  padding:13px 15px;display:grid;grid-template-columns:22px 1fr;gap:11px;align-items:start;
 }
 .hero-verdict svg{width:22px;height:22px;color:var(--mint-deep);margin-top:1px}
-.hero-verdict p{font-size:.92rem;line-height:1.5;color:var(--ink)}
-.hero-verdict b{font-weight:700}
+.hero-verdict p{font-size:.9rem;line-height:1.5;color:var(--ink)}
+.hero-verdict b{font-weight:600}
+
+/* the sweep exists only as motion; without it there is no stray line */
+.scan-sweep{opacity:0}
 
 @media (prefers-reduced-motion:no-preference){
   .hero-title,.hero-lead,.hero-actions,.hero-panel{animation:rise .8s cubic-bezier(.16,1,.3,1) both}
   .hero-lead{animation-delay:.06s}
   .hero-actions{animation-delay:.12s}
   .hero-panel{animation-delay:.1s}
+  .readout-bar i{transition:transform 1.1s cubic-bezier(.16,1,.3,1)}
   @keyframes rise{from{opacity:.001;transform:translateY(14px)}to{opacity:1;transform:none}}
 
   .scan-sweep{animation:sweep 2.6s cubic-bezier(.5,0,.5,1) .5s 1 both}
   @keyframes sweep{
-    0%{transform:translateY(-46px);opacity:0}
+    0%{transform:translateY(-150px);opacity:0}
     12%{opacity:1}
     82%{opacity:1}
-    100%{transform:translateY(46px);opacity:0}
+    100%{transform:translateY(150px);opacity:0}
   }
   .scan-pt{animation:pop .5s cubic-bezier(.16,1,.3,1) both}
   @keyframes pop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:none}}
-  .readout-bar i{transition:transform 1.1s cubic-bezier(.16,1,.3,1)}
 }
 
 /* ---- inner page header ---- */

@@ -42,7 +42,7 @@
   <div class="hero-grid">
     <div>
       <h1 class="hero-title">Ты знаешь английский.<br>Проблема в <em>звуке</em>.</h1>
-      <p class="lead hero-lead">BClear Lab ставит британское произношение. Камера видит, как ты артикулируешь, звук проверяет, что получилось, и приложение говорит, что именно поправить. На каждом повторении, а не раз в неделю.</p>
+      <p class="lead hero-lead">Камера видит, как ты артикулируешь, звук проверяет результат — и приложение говорит, что поправить. На каждом повторении, а не раз в неделю.</p>
       <div class="btn-row hero-actions">
         <a class="btn btn-primary btn-lg" href="early-access.html">Забрать ранний доступ
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
@@ -61,48 +61,39 @@
         <span class="chip chip-mint">/uː/ в school</span>
       </div>
 
-      <svg class="scan" viewBox="0 52 320 130" role="img" aria-label="Схема: сплошным контуром показана артикуляция ученика, пунктиром — целевая форма губ для звука /uː/. На контуре отмечены опорные точки, которые отслеживает камера.">
-        <defs><clipPath id="scanFrame"><rect x="0" y="0" width="320" height="200" rx="16"/></clipPath></defs>
-        <g clip-path="url(#scanFrame)">
-          <rect width="320" height="200" fill="#ECECF3"/>
-          <g stroke="#DDDDE9" stroke-width="1"><path d="M0 50h320M0 100h320M0 150h320M80 0v200M160 0v200M240 0v200"/></g>
-
-          <!-- the attempt: wider and under-rounded -->
-          <path d="M72.7 103.5C98.6 72.8 134 70.4 160 89.3c26-18.9 61.4-16.5 87.3 14.2-23.6 49.5-54.3 61.3-87.3 61.3s-63.7-11.8-87.3-61.3z"
-                fill="#FFFFFF" fill-opacity=".92" stroke="#14141B" stroke-width="2.5" stroke-linejoin="round"/>
-          <ellipse cx="160" cy="116.5" rx="49.6" ry="17.7" fill="#14141B" opacity=".09"/>
-          <path d="M72.7 103.5c30.7-7.1 144-7.1 174.6 0" fill="none" stroke="#14141B" stroke-width="1.75" opacity=".45"/>
-
-          <!-- target shape for /uː/: narrower, properly rounded -->
-          <path d="M112 120c10-28 34-34 48-24 14-10 38-4 48 24-10 32-32 40-48 40s-38-8-48-40z"
-                fill="none" stroke="#00775F" stroke-width="2.5" stroke-dasharray="7 6" stroke-linejoin="round"/>
-
-          <g class="scan-sweep"><rect x="0" y="96" width="320" height="3.5" fill="#00775F" opacity=".5"/></g>
-
-          <g fill="#64FFE3" stroke="#14141B" stroke-width="2">
-            <circle class="scan-pt" cx="72.7" cy="103.5" r="5" style="animation-delay:1.15s"/>
-            <circle class="scan-pt" cx="115.2" cy="79.9" r="5" style="animation-delay:1.25s"/>
-            <circle class="scan-pt" cx="160" cy="89.3" r="5" style="animation-delay:1.35s"/>
-            <circle class="scan-pt" cx="204.8" cy="79.9" r="5" style="animation-delay:1.45s"/>
-            <circle class="scan-pt" cx="247.3" cy="103.5" r="5" style="animation-delay:1.55s"/>
-            <circle class="scan-pt" cx="204.8" cy="153" r="5" style="animation-delay:1.65s"/>
-            <circle class="scan-pt" cx="160" cy="164.8" r="5" style="animation-delay:1.75s"/>
-            <circle class="scan-pt" cx="115.2" cy="153" r="5" style="animation-delay:1.85s"/>
+      <figure class="hero-shot">
+        <img src="assets/hero-face.jpg" width="1478" height="1020" alt="Женщина смотрит во фронтальную камеру и произносит долгий звук /uː/; контур её губ обведён красным, а мятным пунктиром показана эталонная форма для этого звука">
+        <svg class="hero-marks" viewBox="0 0 986 680" aria-hidden="true" focusable="false">
+          <g class="scan-sweep"><rect x="0" y="455" width="986" height="8" fill="#00775F" opacity=".45"/></g>
+          <path d="M385 464 427 428 493 417 560 428 602 464 567 516 494 537 422 516Z"
+                fill="none" stroke="#00775F" stroke-width="4" stroke-dasharray="12 9" stroke-linejoin="round"/>
+          <path d="M411 463 443 421 493 408 544 421 576 463 549 523 494 548 439 523Z"
+                fill="none" stroke="#E5384A" stroke-width="4" stroke-linejoin="round"/>
+          <g fill="#E5384A" stroke="#14141B" stroke-width="2.4">
+            <circle class="scan-pt" cx="411" cy="463" r="9" style="animation-delay:1.15s"/>
+            <circle class="scan-pt" cx="443" cy="421" r="9" style="animation-delay:1.24s"/>
+            <circle class="scan-pt" cx="493" cy="408" r="9" style="animation-delay:1.33s"/>
+            <circle class="scan-pt" cx="544" cy="421" r="9" style="animation-delay:1.42s"/>
+            <circle class="scan-pt" cx="576" cy="463" r="9" style="animation-delay:1.51s"/>
+            <circle class="scan-pt" cx="549" cy="523" r="9" style="animation-delay:1.60s"/>
+            <circle class="scan-pt" cx="494" cy="548" r="9" style="animation-delay:1.69s"/>
+            <circle class="scan-pt" cx="439" cy="523" r="9" style="animation-delay:1.78s"/>
           </g>
-        </g>
-      </svg>
-
-      <p class="scan-legend"><span><i class="k-solid"></i>твоя попытка</span><span><i class="k-dash"></i>эталон /uː/</span></p>
+        </svg>
+        <p class="scan-legend">
+          <span><i class="k-now"></i>твоя артикуляция</span>
+          <span><i class="k-goal"></i>эталон</span>
+        </p>
+      </figure>
 
       <div class="hero-readout">
-        <div class="readout-row"><span class="k">Раскрытие челюсти</span><span class="readout-bar"><i data-value="92"></i></span><span class="v">92%</span></div>
-        <div class="readout-row"><span class="k">Округление губ</span><span class="readout-bar"><i data-value="41"></i></span><span class="v">41%</span></div>
-        <div class="readout-row"><span class="k">Длительность гласного</span><span class="readout-bar"><i data-value="86"></i></span><span class="v">86%</span></div>
+        <div class="readout-row"><span class="k">Округление губ</span><span class="readout-bar"><i data-value="46"></i></span><span class="v">46%</span></div>
+        <div class="readout-row"><span class="k">Длительность гласного</span><span class="readout-bar"><i data-value="41"></i></span><span class="v">41%</span></div>
       </div>
 
       <div class="hero-verdict">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6.5 6.5 0 0 1 3.9 11.7c-.6.5-.9 1.1-.9 1.8v.5H9v-.5c0-.7-.3-1.3-.9-1.8A6.5 6.5 0 0 1 12 3z"/><path d="M9.5 20.5h5M10 18h4"/></svg>
-        <p><b>Губы почти не округлены.</b> Вытяни их вперёд трубочкой, сильнее, чем для русского «у», и держи округление до конца звука.</p>
+        <p><b>Губы слишком собраны в трубочку</b> — как для русского «у». В британском <span class="ipa">/uː/</span> они шире и округлены слабее.</p>
       </div>
     </div>
   </div>

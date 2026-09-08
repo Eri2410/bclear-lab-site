@@ -42,17 +42,15 @@
 
   /* ---- hero readout: the one authored moment ---- */
   var panel = document.querySelector('.hero-panel');
-  if (panel && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (panel) {
     var bars = panel.querySelectorAll('.readout-bar i');
-    window.setTimeout(function () {
+    var apply = function () {
       Array.prototype.forEach.call(bars, function (bar) {
         bar.style.transform = 'scaleX(' + bar.dataset.value / 100 + ')';
       });
-    }, 700);
-  } else if (panel) {
-    Array.prototype.forEach.call(panel.querySelectorAll('.readout-bar i'), function (bar) {
-      bar.style.transform = 'scaleX(' + bar.dataset.value / 100 + ')';
-    });
+    };
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { apply(); }
+    else { window.setTimeout(apply, 700); }
   }
 
   /* ---- waitlist form: no endpoint wired yet ---- */
