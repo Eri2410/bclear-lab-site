@@ -4,119 +4,128 @@
 <meta charset="utf-8">
 <title>BClear Lab — превью для мессенджеров</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Golos+Text:wght@400;500;600&family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Golos+Text:wght@400;500;600&family=Noto+Sans:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ground:#ECECF3;--ink:#14141B;--ink2:#4B4B59;--ink3:#63636E;
+  --ground:#ECECF3;--card:#fff;--ink:#14141B;--ink2:#4B4B59;--ink3:#63636E;
   --mint:#64FFE3;--mint-soft:#D5FFF6;--deep:#00775F;--lilac:#EADCFE;--lilac-ink:#5B2CA8;
+  --warn:#E5384A;--line:#E0E0EA;
   --f-d:"Jost","Century Gothic",sans-serif;--f-t:"Golos Text",sans-serif;
 }
 *{box-sizing:border-box}
-body{margin:0;background:#7A7A8C;font-family:var(--f-t);padding:40px;display:grid;gap:40px;justify-items:center}
-.label{font:600 14px var(--f-t);color:#fff;letter-spacing:.02em;align-self:end}
+body{margin:0;background:#7A7A8C;font-family:var(--f-t);padding:40px;display:grid;justify-items:center}
 
-/* the OG card itself — exactly 1200x630 */
+/* карточка ровно 1200x630 — размер, который читают мессенджеры и соцсети */
 .og{
-  width:1200px;height:630px;position:relative;overflow:hidden;
-  display:grid;grid-template-columns:1fr 452px;align-items:center;
-  gap:46px;padding:58px 58px 58px 68px;
+  width:1200px;height:630px;position:relative;overflow:hidden;background:var(--ground);color:var(--ink);
+  display:grid;grid-template-columns:1fr 420px;gap:44px;padding:56px 56px 56px 64px;align-items:center;
 }
 .og-text{display:flex;flex-direction:column;justify-content:center;height:100%}
-.og-a{background:var(--ground);color:var(--ink)}
-.og-b{background:var(--mint);color:var(--ink)}
+.logo{height:38px;width:auto;display:block;align-self:flex-start}
 
-.logo{height:44px;width:auto;display:block;align-self:flex-start}
-.logo-plate{align-self:flex-start;background:#fff;border-radius:16px;padding:13px 20px;box-shadow:0 2px 4px rgba(20,20,45,.06),0 10px 24px rgba(20,20,45,.08)}
-.og h1{
-  font-family:var(--f-d);font-weight:600;font-size:62px;line-height:1.04;
-  letter-spacing:-.032em;margin:30px 0 0;
+.eyebrow{
+  display:flex;align-items:center;gap:9px;margin:26px 0 0;
+  font-family:var(--f-d);font-weight:500;font-size:16px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--deep);
 }
-.og h1 em{font-style:normal}
-.og-a h1 em{color:var(--deep)}
-.og-b h1 em{color:#00463A}
-.sub{margin:24px 0 0;font-size:22px;line-height:1.42;max-width:23em}
-.og-a .sub{color:var(--ink2)}
-.og-b .sub{color:#0C4A3D}
-.foot{margin:32px 0 0;display:flex;align-items:center;gap:13px;font-size:18px}
-.og-a .foot{color:var(--ink3)}
-.og-b .foot{color:#0C4A3D}
-.foot svg{width:20px;height:20px;flex:none}
-.dot{width:5px;height:5px;border-radius:99px;background:currentColor;opacity:.45}
+.flag{width:26px;height:13px;flex:none;border-radius:2px;box-shadow:0 0 0 1px rgba(20,20,45,.14)}
 
-/* diagram panel */
-.panel{background:#fff;border-radius:26px;padding:26px;box-shadow:0 4px 10px rgba(20,20,45,.06),0 22px 50px rgba(20,20,45,.11)}
-.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
-.panel-head strong{font-family:var(--f-d);font-weight:600;font-size:18px}
-.chip{background:var(--mint);color:var(--ink);border-radius:99px;padding:7px 15px;font-size:14px;font-weight:600;font-family:var(--f-t)}
-.scan{display:block;width:100%;height:auto;border-radius:16px}
-.legend{margin:14px 0 0;display:flex;gap:22px;font-size:14px;color:var(--ink3)}
+h1{
+  font-family:var(--f-d);font-weight:600;font-size:54px;line-height:1.06;
+  letter-spacing:-.03em;margin:16px 0 0;text-wrap:balance;
+}
+h1 em{font-style:normal;color:var(--deep)}
+
+.sub{margin:20px 0 0;font-size:19.5px;line-height:1.46;color:var(--ink2);max-width:30em}
+
+.chips{margin:26px 0 0;display:flex;flex-wrap:wrap;gap:10px}
+.chip{
+  border-radius:99px;padding:11px 18px;font-size:17px;font-weight:500;
+  display:inline-flex;align-items:center;gap:9px;
+}
+.chip svg{width:16px;height:16px;flex:none}
+.c-mint{background:var(--mint);color:#06342A}
+.c-lilac{background:var(--lilac);color:var(--lilac-ink)}
+.c-soft{background:var(--mint-soft);color:var(--deep)}
+
+/* правая колонка — реальный кадр разбора */
+.panel{
+  background:var(--card);border-radius:26px;padding:20px;
+  box-shadow:0 4px 10px rgba(20,20,45,.06),0 22px 50px rgba(20,20,45,.11);
+}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.panel-head strong{font-family:var(--f-d);font-weight:600;font-size:17px}
+.panel-head .tag{background:var(--mint);border-radius:99px;padding:6px 13px;font-size:13.5px;font-weight:600}
+.ipa{font-family:"Noto Sans",var(--f-t)}
+
+.shot{position:relative;width:380px;height:398px;border-radius:16px;overflow:hidden;background:var(--ground)}
+.shot-inner{position:absolute;width:1134px;height:782px;left:-357px;top:-337px}
+.shot-inner img{display:block;width:100%;height:100%}
+.shot-inner svg{position:absolute;inset:0;width:100%;height:100%}
+
+.legend{margin:13px 0 0;display:flex;gap:20px;font-size:13.5px;color:var(--ink3)}
 .legend span{display:inline-flex;align-items:center;gap:8px}
-.legend i{display:block;width:22px;height:0}
-.k-solid{border-top:2.5px solid var(--ink)}
-.k-dash{border-top:2.5px dashed var(--deep)}
-.verdict{margin-top:18px;background:var(--mint-soft);border-radius:14px;padding:15px 17px;font-size:15.5px;line-height:1.42}
-.verdict b{font-weight:600}
+.legend i{display:block;width:20px;height:0;flex:none}
+.k-now{border-top:3px solid var(--warn)}
+.k-goal{border-top:3px dashed var(--deep)}
 </style>
 </head>
 <body>
 
-<p class="label">Вариант A — фон как на сайте</p>
-<div class="og og-a" id="a">
+<div class="og" id="og">
   <div class="og-text">
     <img class="logo" src="logo-wordmark.svg" alt="">
-    <h1>Ты знаешь английский.<br>Проблема в <em>звуке</em>.</h1>
-    <p class="sub">Камера видит, как ты артикулируешь. Звук проверяет, что получилось.</p>
-    <p class="foot">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>
-      Британское произношение<span class="dot"></span>прямо в браузере
-    </p>
-  </div>
-  <div class="panel">
-    <div class="panel-head"><strong>Разбор попытки</strong><span class="chip">/uː/ в school</span></div>
-    <svg class="scan" viewBox="0 0 320 190">
-      <rect width="320" height="190" rx="14" fill="#ECECF3"/>
-      <g stroke="#DDDDE9" stroke-width="1"><path d="M0 47h320M0 95h320M0 143h320M80 0v190M160 0v190M240 0v190"/></g>
-      <path d="M72.7 98.5C98.6 67.8 134 65.4 160 84.3c26-18.9 61.4-16.5 87.3 14.2-23.6 49.5-54.3 61.3-87.3 61.3s-63.7-11.8-87.3-61.3z" fill="#fff" fill-opacity=".92" stroke="#14141B" stroke-width="2.5" stroke-linejoin="round"/>
-      <ellipse cx="160" cy="111.5" rx="49.6" ry="17.7" fill="#14141B" opacity=".09"/>
-      <path d="M72.7 98.5c30.7-7.1 144-7.1 174.6 0" fill="none" stroke="#14141B" stroke-width="1.75" opacity=".45"/>
-      <path d="M112 115c10-28 34-34 48-24 14-10 38-4 48 24-10 32-32 40-48 40s-38-8-48-40z" fill="none" stroke="#00775F" stroke-width="2.5" stroke-dasharray="7 6" stroke-linejoin="round"/>
-      <g fill="#64FFE3" stroke="#14141B" stroke-width="2">
-        <circle cx="72.7" cy="98.5" r="5"/><circle cx="115.2" cy="74.9" r="5"/><circle cx="160" cy="84.3" r="5"/>
-        <circle cx="204.8" cy="74.9" r="5"/><circle cx="247.3" cy="98.5" r="5"/><circle cx="204.8" cy="148" r="5"/>
-        <circle cx="160" cy="159.8" r="5"/><circle cx="115.2" cy="148" r="5"/>
-      </g>
-    </svg>
-    <p class="verdict"><b>Губы почти не округлены.</b> Вытяни их вперёд трубочкой и держи до конца звука.</p>
-  </div>
-</div>
 
-<p class="label">Вариант B — мятный, ярче в ленте мессенджера</p>
-<div class="og og-b" id="b">
-  <div class="og-text">
-    <span class="logo-plate"><img class="logo" src="logo-wordmark.svg" alt=""></span>
-    <h1>Ты знаешь английский.<br>Проблема в <em>звуке</em>.</h1>
-    <p class="sub">Камера видит, как ты артикулируешь. Звук проверяет, что получилось.</p>
-    <p class="foot">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>
-      Британское произношение<span class="dot"></span>прямо в браузере
+    <p class="eyebrow">
+      <svg class="flag" viewBox="0 0 60 30"><clipPath id="f"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><rect width="60" height="30" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#f)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></svg>
+      ИИ-коуч английского произношения
     </p>
+
+    <h1>Пусть мир услышит вашу <em>экспертность</em> вместо акцента.</h1>
+
+    <p class="sub">Приложение через камеру и микрофон сканирует вашу мимику и произношение, выдавая подсказки к каждому звуку — без стресса и стеснения.</p>
+
+    <div class="chips">
+      <span class="chip c-mint">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 9.5 17 19 7"/></svg>
+        Понимают с первого раза
+      </span>
+      <span class="chip c-lilac">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 9.5 17 19 7"/></svg>
+        Нет паузы перед словом
+      </span>
+      <span class="chip c-soft">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 9.5 17 19 7"/></svg>
+        Слышите свои ошибки
+      </span>
+    </div>
   </div>
+
   <div class="panel">
-    <div class="panel-head"><strong>Разбор попытки</strong><span class="chip" style="background:#D5FFF6;color:#00775F">/uː/ в school</span></div>
-    <svg class="scan" viewBox="0 0 320 190">
-      <rect width="320" height="190" rx="14" fill="#F1F1F6"/>
-      <g stroke="#E0E0EA" stroke-width="1"><path d="M0 47h320M0 95h320M0 143h320M80 0v190M160 0v190M240 0v190"/></g>
-      <path d="M72.7 98.5C98.6 67.8 134 65.4 160 84.3c26-18.9 61.4-16.5 87.3 14.2-23.6 49.5-54.3 61.3-87.3 61.3s-63.7-11.8-87.3-61.3z" fill="#fff" fill-opacity=".92" stroke="#14141B" stroke-width="2.5" stroke-linejoin="round"/>
-      <ellipse cx="160" cy="111.5" rx="49.6" ry="17.7" fill="#14141B" opacity=".09"/>
-      <path d="M72.7 98.5c30.7-7.1 144-7.1 174.6 0" fill="none" stroke="#14141B" stroke-width="1.75" opacity=".45"/>
-      <path d="M112 115c10-28 34-34 48-24 14-10 38-4 48 24-10 32-32 40-48 40s-38-8-48-40z" fill="none" stroke="#00775F" stroke-width="2.5" stroke-dasharray="7 6" stroke-linejoin="round"/>
-      <g fill="#64FFE3" stroke="#14141B" stroke-width="2">
-        <circle cx="72.7" cy="98.5" r="5"/><circle cx="115.2" cy="74.9" r="5"/><circle cx="160" cy="84.3" r="5"/>
-        <circle cx="204.8" cy="74.9" r="5"/><circle cx="247.3" cy="98.5" r="5"/><circle cx="204.8" cy="148" r="5"/>
-        <circle cx="160" cy="159.8" r="5"/><circle cx="115.2" cy="148" r="5"/>
-      </g>
-    </svg>
-    <p class="verdict"><b>Губы почти не округлены.</b> Вытяни их вперёд трубочкой и держи до конца звука.</p>
+    <div class="panel-head"><strong>Разбор попытки</strong><span class="tag"><span class="ipa">/uː/</span> в school</span></div>
+    <div class="shot">
+      <div class="shot-inner">
+        <img src="hero-face.jpg" alt="">
+        <svg viewBox="0 0 986 680">
+          <ellipse cx="482.6" cy="466.5" rx="105" ry="52.7" transform="rotate(-1.2 482.6 466.5)" fill="none" stroke="#00775F" stroke-width="4" stroke-dasharray="12 9"/>
+          <path d="M450.2 376.8 510.5 376.8 554.5 416.6 564.4 483 539.5 554.3 430.5 554.3 387.9 492.1 407.3 411.6Z" fill="none" stroke="#E5384A" stroke-width="4" stroke-linejoin="round"/>
+          <g fill="#E5384A">
+            <circle cx="450.2" cy="376.8" r="9.5"/>
+            <circle cx="510.5" cy="376.8" r="9.5"/>
+            <circle cx="554.5" cy="416.6" r="9.5"/>
+            <circle cx="564.4" cy="483" r="9.5"/>
+            <circle cx="539.5" cy="554.3" r="9.5"/>
+            <circle cx="430.5" cy="554.3" r="9.5"/>
+            <circle cx="387.9" cy="492.1" r="9.5"/>
+            <circle cx="407.3" cy="411.6" r="9.5"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <p class="legend">
+      <span><i class="k-now"></i>ваша артикуляция</span>
+      <span><i class="k-goal"></i>эталон</span>
+    </p>
   </div>
 </div>
 
