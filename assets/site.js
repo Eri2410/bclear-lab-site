@@ -53,6 +53,56 @@
     else { window.setTimeout(apply, 700); }
   }
 
+  /* ---- reveal on scroll ---- */
+  (function () {
+    if (!('IntersectionObserver' in window)) { return; }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { return; }
+
+    var GROUPS = '.grid, .pains, .rows, .layers, .principles, .flow, .wants, .reqs, .timeline, .form-grid, .pull-grid';
+    var SOLO = '.head, .card, .table-wrap, .qa, .stage, .cta-band .shell';
+    var main = document.getElementById('main');
+    if (!main) { return; }
+
+    var picked = [];
+    main.querySelectorAll(GROUPS).forEach(function (group) {
+      Array.prototype.forEach.call(group.children, function (child) { picked.push(child); });
+    });
+    main.querySelectorAll(SOLO).forEach(function (el) { picked.push(el); });
+
+    // герой ведёт собственную анимацию входа, ему второй слой ни к чему
+    var hero = main.querySelector('.hero');
+    picked = picked.filter(function (el) { return !hero || !hero.contains(el); });
+
+    // если предок уже размечен, потомка не трогаем, иначе появление задваивается
+    var set = new Set(picked);
+    var items = picked.filter(function (el) {
+      for (var p = el.parentElement; p && p !== main; p = p.parentElement) {
+        if (set.has(p)) { return false; }
+      }
+      return true;
+    });
+    if (!items.length) { return; }
+
+    document.documentElement.classList.add('js-reveal');
+    items.forEach(function (el) { el.setAttribute('data-reveal', ''); });
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) { return; }
+        var el = entry.target;
+        var sibs = Array.prototype.filter.call(el.parentElement.children, function (n) {
+          return n.hasAttribute && n.hasAttribute('data-reveal');
+        });
+        var i = sibs.indexOf(el);
+        el.style.setProperty('--reveal-delay', Math.min(i < 0 ? 0 : i, 4) * 70 + 'ms');
+        el.classList.add('is-in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
+    items.forEach(function (el) { io.observe(el); });
+  })();
+
   /* ---- waitlist: no backend yet, so we compose a letter ---- */
   var form = document.querySelector('form[data-waitlist]');
   if (form) {
