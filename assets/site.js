@@ -69,7 +69,7 @@
     });
     main.querySelectorAll(SOLO).forEach(function (el) { picked.push(el); });
 
-    // герой ведёт собственную анимацию входа, ему второй слой ни к чему
+    // герой ведет собственную анимацию входа, ему второй слой ни к чему
     var hero = main.querySelector('.hero');
     picked = picked.filter(function (el) { return !hero || !hero.contains(el); });
 
@@ -115,7 +115,7 @@
       e.preventDefault();
       var value = email.value.trim();
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
-        err.textContent = 'Похоже, в адресе опечатка. Проверь и попробуй ещё раз.';
+        err.textContent = 'Похоже, в адресе опечатка. Проверьте и попробуйте еще раз.';
         email.setAttribute('aria-invalid', 'true');
         email.focus();
         return;
