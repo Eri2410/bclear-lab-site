@@ -23,30 +23,26 @@ body{margin:0;background:#7A7A8C;font-family:var(--f-t);padding:40px;display:gri
 .og-text{display:flex;flex-direction:column;justify-content:center;height:100%}
 .logo{height:38px;width:auto;display:block;align-self:flex-start}
 
-.eyebrow{
-  display:flex;align-items:center;gap:9px;margin:26px 0 0;
-  font-family:var(--f-d);font-weight:500;font-size:16px;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--deep);
-}
-.flag{width:26px;height:13px;flex:none;border-radius:2px;box-shadow:0 0 0 1px rgba(20,20,45,.14)}
-
 h1{
-  font-family:var(--f-d);font-weight:600;font-size:54px;line-height:1.06;
-  letter-spacing:-.03em;margin:16px 0 0;text-wrap:balance;
+  font-family:var(--f-d);font-weight:600;font-size:54px;line-height:1.1;
+  letter-spacing:-.03em;margin:30px 0 0;text-wrap:balance;
 }
-h1 em{font-style:normal;color:var(--deep)}
+.flag-h1{
+  width:58px;height:29px;display:inline-block;vertical-align:-2px;margin-left:16px;
+  border-radius:3px;box-shadow:0 0 0 1.5px rgba(20,20,45,.14);
+}
 
 .sub{margin:20px 0 0;font-size:19.5px;line-height:1.46;color:var(--ink2);max-width:30em}
 
-.chips{margin:26px 0 0;display:flex;flex-wrap:wrap;gap:10px}
+.chips{margin:26px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .chip{
-  border-radius:99px;padding:11px 18px;font-size:17px;font-weight:500;
-  display:inline-flex;align-items:center;gap:9px;
+  border-radius:99px;padding:11px 17px;font-size:16px;font-weight:500;
+  display:flex;align-items:center;gap:9px;
 }
-.chip svg{width:16px;height:16px;flex:none}
-.c-mint{background:var(--mint);color:#06342A}
-.c-lilac{background:var(--lilac);color:var(--lilac-ink)}
-.c-soft{background:var(--mint-soft);color:var(--deep)}
+.chip svg{width:17px;height:17px;flex:none}
+/* лиловые — что делает приложение, мятные — что получает человек */
+.c-does{background:var(--lilac);color:var(--lilac-ink)}
+.c-gets{background:var(--mint);color:#06342A}
 
 /* правая колонка — реальный кадр разбора */
 .panel{
@@ -76,27 +72,26 @@ h1 em{font-style:normal;color:var(--deep)}
   <div class="og-text">
     <img class="logo" src="logo-wordmark.svg" alt="">
 
-    <p class="eyebrow">
-      <svg class="flag" viewBox="0 0 60 30"><clipPath id="f"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><rect width="60" height="30" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#f)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></svg>
-      ИИ-коуч английского произношения
-    </p>
-
-    <h1>Пусть мир услышит вашу <em>экспертность</em> вместо акцента.</h1>
+    <h1>ИИ-коуч английского произношения<svg class="flag-h1" viewBox="0 0 60 30" role="img" aria-label="британский вариант"><clipPath id="f"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><rect width="60" height="30" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#f)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></svg></h1>
 
     <p class="sub">Приложение через камеру и микрофон сканирует вашу мимику и произношение, выдавая подсказки к каждому звуку — без стресса и стеснения.</p>
 
     <div class="chips">
-      <span class="chip c-mint">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 9.5 17 19 7"/></svg>
+      <span class="chip c-does">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2 13.6 8 18.8 9.6 13.6 11.2 12 16 10.4 11.2 5.2 9.6 10.4 8z"/><path d="M18.4 15.2 19.2 17.6 21.6 18.4 19.2 19.2 18.4 21.6 17.6 19.2 15.2 18.4 17.6 17.6z"/></svg>
+        ИИ-разбор ошибок
+      </span>
+      <span class="chip c-does">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4M8 6.5v11M12 3.5v17M16 6.5v11M20 10v4"/></svg>
+        Четкое произношение
+      </span>
+      <span class="chip c-gets">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 9.5 17 19 7"/></svg>
         Понимают с первого раза
       </span>
-      <span class="chip c-lilac">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 9.5 17 19 7"/></svg>
-        Нет паузы перед словом
-      </span>
-      <span class="chip c-soft">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 9.5 17 19 7"/></svg>
-        Слышите свои ошибки
+      <span class="chip c-gets">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 9.5 17 19 7"/></svg>
+        Принимают за своего
       </span>
     </div>
   </div>

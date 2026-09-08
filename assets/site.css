@@ -222,6 +222,18 @@ strong,b{font-weight:600}
 .hero-title,.hero-lead{text-wrap:pretty}
 .hero-note svg{width:16px;height:16px;flex:none;color:var(--mint-deep);margin-top:3px}
 
+/* ---- goals ---- */
+section[id]{scroll-margin-top:92px}
+.goals{margin-top:30px}
+.goal{display:flex;align-items:center;gap:15px;padding:17px 20px}
+.goal-ic{
+  width:40px;height:40px;border-radius:12px;flex:none;
+  background:var(--mint-soft);color:var(--mint-deep);
+  display:grid;place-items:center;
+}
+.goal-ic svg{width:21px;height:21px}
+.goal h3{font-size:1.02rem;letter-spacing:-.012em;text-wrap:balance}
+
 /* ---- feature list ---- */
 .ticks{list-style:none;margin:0;padding:0;display:grid;gap:13px}
 .ticks li{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;line-height:1.55}
