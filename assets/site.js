@@ -53,16 +53,18 @@
     else { window.setTimeout(apply, 700); }
   }
 
-  /* ---- waitlist form: no endpoint wired yet ---- */
+  /* ---- waitlist: no backend yet, so we compose a letter ---- */
   var form = document.querySelector('form[data-waitlist]');
   if (form) {
     var email = form.querySelector('input[type="email"]');
+    var level = form.querySelector('#level');
+    var goal = form.querySelector('#goal');
     var err = form.querySelector('.field-err');
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var value = email.value.trim();
-      var valid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
-      if (!valid) {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
         err.textContent = 'Похоже, в адресе опечатка. Проверь и попробуй ещё раз.';
         email.setAttribute('aria-invalid', 'true');
         email.focus();
@@ -70,13 +72,21 @@
       }
       err.textContent = '';
       email.removeAttribute('aria-invalid');
+
+      var lines = ['Почта: ' + value];
+      if (level.value) { lines.push('Уровень: ' + level.value); }
+      var why = goal.value.trim().slice(0, 900);
+      if (why) { lines.push('', 'Зачем произношение:', why); }
+
+      window.location.href = 'mailto:info@bclearlab.ru'
+        + '?subject=' + encodeURIComponent('Ранний доступ — BClear Lab')
+        + '&body=' + encodeURIComponent(lines.join('\n'));
+
       form.dataset.sent = 'true';
       var ok = form.querySelector('.form-ok');
-      if (ok) {
-        ok.setAttribute('tabindex', '-1');
-        ok.focus();
-      }
+      if (ok) { ok.setAttribute('tabindex', '-1'); ok.focus(); }
     });
+
     email.addEventListener('input', function () {
       err.textContent = '';
       email.removeAttribute('aria-invalid');
