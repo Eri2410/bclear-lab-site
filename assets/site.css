@@ -55,7 +55,7 @@ body{
 }
 
 /* ---- browser surfaces ---- */
-::selection{background:var(--mint); color:var(--ink)}
+::selection{background:var(--line-2); color:var(--ink)}
 :where(input,textarea){caret-color:var(--mint-deep)}
 @supports (scrollbar-color:auto){
   html{scrollbar-color:var(--line-2) var(--ground); scrollbar-width:thin}
@@ -218,6 +218,9 @@ strong,b{font-weight:600}
 .hero .lead{margin-top:18px;max-width:46ch;font-size:clamp(1rem,1.25vw,1.12rem)}
 .hero .btn-row{margin-top:26px}
 .hero-note{margin-top:16px;display:flex;align-items:flex-start;gap:9px;color:var(--ink-3);font-size:.83rem}
+/* без ограничения по ширине — на широком экране строка одна;
+   balance включается только когда строк становится больше одной */
+.hero-note>span{text-wrap:balance}
 .hero-title,.hero-lead{text-wrap:pretty}
 .hero-note svg{width:16px;height:16px;flex:none;color:var(--mint-deep);margin-top:3px}
 
