@@ -55,7 +55,11 @@ h1{
 .ipa{font-family:"Noto Sans",var(--f-t)}
 
 .shot{position:relative;width:380px;height:398px;border-radius:16px;overflow:hidden;background:var(--ground)}
-.shot-inner{position:absolute;width:1134px;height:782px;left:-357px;top:-337px}
+/* Окно .shot показывает участок hero-face.jpg (1478x1020) от точки 437,320
+   размером 573x600 — нос, губы и подбородок. Ширина .shot-inner задает
+   масштаб: 980.3 / 1478 = 0.6633, смещения — та же точка в этом масштабе.
+   Меняя кадр, пересчитайте все четыре числа, разметка поедет за ними сама. */
+.shot-inner{position:absolute;width:980.3px;height:676.6px;left:-290.1px;top:-212.2px}
 .shot-inner img{display:block;width:100%;height:100%}
 .shot-inner svg{position:absolute;inset:0;width:100%;height:100%}
 
@@ -101,18 +105,21 @@ h1{
     <div class="shot">
       <div class="shot-inner">
         <img src="hero-face.jpg" alt="">
-        <svg viewBox="0 0 986 680">
-          <ellipse cx="482.6" cy="466.5" rx="105" ry="52.7" transform="rotate(-1.2 482.6 466.5)" fill="none" stroke="#00775F" stroke-width="4" stroke-dasharray="12 9"/>
-          <path d="M450.2 376.8 510.5 376.8 554.5 416.6 564.4 483 539.5 554.3 430.5 554.3 387.9 492.1 407.3 411.6Z" fill="none" stroke="#E5384A" stroke-width="4" stroke-linejoin="round"/>
+        <!-- viewBox совпадает с пикселями hero-face.jpg, поэтому точки разметки
+             привязаны к лицу и переживают любое перекадрирование .shot-inner.
+             Толщина линий подобрана так, чтобы на карточке остаться ~4.6px. -->
+        <svg viewBox="0 0 1478 1020">
+          <ellipse cx="723.9" cy="699.8" rx="157.5" ry="79.1" transform="rotate(-1.2 723.9 699.8)" fill="none" stroke="#00775F" stroke-width="7" stroke-dasharray="20.8 15.6"/>
+          <path d="M675.3 565.2 765.8 565.2 831.8 624.9 846.6 724.5 809.3 831.5 645.8 831.5 581.9 738.2 611 617.4Z" fill="none" stroke="#E5384A" stroke-width="7" stroke-linejoin="round"/>
           <g fill="#E5384A">
-            <circle cx="450.2" cy="376.8" r="9.5"/>
-            <circle cx="510.5" cy="376.8" r="9.5"/>
-            <circle cx="554.5" cy="416.6" r="9.5"/>
-            <circle cx="564.4" cy="483" r="9.5"/>
-            <circle cx="539.5" cy="554.3" r="9.5"/>
-            <circle cx="430.5" cy="554.3" r="9.5"/>
-            <circle cx="387.9" cy="492.1" r="9.5"/>
-            <circle cx="407.3" cy="411.6" r="9.5"/>
+            <circle cx="675.3" cy="565.2" r="16.5"/>
+            <circle cx="765.8" cy="565.2" r="16.5"/>
+            <circle cx="831.8" cy="624.9" r="16.5"/>
+            <circle cx="846.6" cy="724.5" r="16.5"/>
+            <circle cx="809.3" cy="831.5" r="16.5"/>
+            <circle cx="645.8" cy="831.5" r="16.5"/>
+            <circle cx="581.9" cy="738.2" r="16.5"/>
+            <circle cx="611" cy="617.4" r="16.5"/>
           </g>
         </svg>
       </div>
