@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/logo-mark.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Golos+Text:wght@400;500;600&family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css">
-<title>Страница не найдена — BClear Lab</title>
-<meta name="description" content="Такой страницы нет. Вот куда можно пойти дальше.">
-<meta name="robots" content="noindex">
-<meta property="og:title" content="Страница не найдена — BClear Lab">
-<meta property="og:description" content="Такой страницы нет. Вот куда можно пойти дальше.">
+<link rel="stylesheet" href="/assets/site.css">
+<title>Анатомия речи — блог BClear Lab</title>
+<link rel="canonical" href="https://bclearlab.ru/blog/">
+<meta name="description" content="Разбираем, что физически мешает нам звучать естественно, как устроен речевой аппарат и какие методы тренировок действительно работают каждый день.">
+<meta property="og:title" content="Анатомия речи — блог BClear Lab">
+<meta property="og:description" content="Разбираем, что физически мешает нам звучать естественно, как устроен речевой аппарат и какие методы тренировок действительно работают каждый день.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://bclearlab.ru/404">
+<meta property="og:url" content="https://bclearlab.ru/blog/">
 <meta property="og:site_name" content="BClear Lab">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:image" content="https://bclearlab.ru/assets/og.jpg">
@@ -23,8 +23,8 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Заголовок «ИИ-коуч английского произношения» и кадр разбора: губы обведены красным контуром, мятным пунктиром показана эталонная форма звука">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Страница не найдена — BClear Lab">
-<meta name="twitter:description" content="Такой страницы нет. Вот куда можно пойти дальше.">
+<meta name="twitter:title" content="Анатомия речи — блог BClear Lab">
+<meta name="twitter:description" content="Разбираем, что физически мешает нам звучать естественно, как устроен речевой аппарат и какие методы тренировок действительно работают каждый день.">
 <meta name="twitter:image" content="https://bclearlab.ru/assets/og.jpg">
 <meta name="theme-color" content="#ECECF3">
 <!-- Yandex.Metrika counter -->
@@ -41,7 +41,7 @@ ym(112385067,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
 <header class="site-head">
   <div class="shell head-in">
     <a class="brand" href="/" aria-label="BClear Lab — на главную">
-      <img src="assets/logo-wordmark.svg" alt="BClear Lab" width="295" height="69">
+      <img src="/assets/logo-wordmark.svg" alt="BClear Lab" width="295" height="69">
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -52,7 +52,7 @@ ym(112385067,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
       <a href="/method">Методика</a>
       <a href="/how">Как работает</a>
       <a href="/compare">Сравнение</a>
-      <a href="/blog/">Блог</a>
+      <a href="/blog/" aria-current="page">Блог</a>
       <a href="/about">О команде</a>
       <a class="btn btn-primary" href="/early-access">Ранний доступ</a>
     </nav>
@@ -62,60 +62,50 @@ ym(112385067,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
 <main id="main">
 
 <section class="shell page-head">
-  <div class="nf-grid">
-    <div>
-      <h1>Такой страницы нет</h1>
-      <p class="lead">Ссылка могла устареть, или в адресе опечатка — сервер отвечает ошибкой 404. Ничего не сломалось, просто здесь пусто.</p>
-      <div class="btn-row" style="margin-top:30px">
-        <a class="btn btn-primary btn-lg" href="/">На главную</a>
-        <a class="btn btn-ghost btn-lg" href="/early-access">Ранний доступ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Один звук — уже другое слово</h3>
-      <p class="muted small" style="margin-top:11px;margin-bottom:20px">С адресами ровно так же: одна буква мимо, и попадаете не туда. В английском цена промаха выше.</p>
-      <div class="pairs">
-        <div class="pair-group">
-          <div class="pair"><b>ship</b><span class="ipa">/ʃɪp/</span><span class="m">корабль</span></div>
-          <div class="pair"><b>sheep</b><span class="ipa">/ʃiːp/</span><span class="m">овца</span></div>
-        </div>
-        <div class="pair-group">
-          <div class="pair"><b>bad</b><span class="ipa">/bæd/</span><span class="m">плохой</span></div>
-          <div class="pair"><b>bed</b><span class="ipa">/bed/</span><span class="m">кровать</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <span class="chip chip-lilac">Блог</span>
+  <h1>Анатомия речи</h1>
+  <p class="lead">Разбираем, что физически мешает нам звучать естественно, как устроен речевой аппарат и какие методы тренировок действительно работают каждый день.</p>
 </section>
 
 <section class="shell section-tight">
-  <div class="head"><h2>Куда можно пойти</h2></div>
-  <div class="grid g-3" style="margin-top:30px">
-    <a class="card card-link" href="/why">
-      <h3>Зачем произношение</h3>
-      <p class="muted small" style="margin-top:11px">Что на самом деле болит, что дает постановка звука и что мешает русскоязычным.</p>
+  <div class="post-list">
+    <a class="card card-link post-card" href="/blog/slushay-i-povtoryay">
+      <p class="post-meta">
+        <span><time datetime="2026-07-23">23 июля 2026</time></span>
+        <span>4 минуты</span>
+      </p>
+      <h2>Почему метод «слушай и повторяй» не работает</h2>
+      <p class="muted">Главная ошибка приложений по произношению: они предлагают копировать звук на слух, а собственное ухо — самый ненадежный контролер, какой у вас есть.</p>
+      <span class="post-more">Читать</span>
     </a>
-    <a class="card card-link" href="/method">
-      <h3>Методика</h3>
-      <p class="muted small" style="margin-top:11px">Семь слоев и принципы практики, на которых все держится.</p>
+    <a class="card card-link post-card" href="/blog/ne-slyshim-beglu-rech">
+      <p class="post-meta">
+        <span><time datetime="2026-06-17">17 июня 2026</time></span>
+        <span>3 минуты</span>
+      </p>
+      <h2>Почему мы не слышим беглую английскую речь</h2>
+      <p class="muted">Разбираем скрытую ловушку фонетики: почему наше собственное произношение мешает нам понимать носителей на слух.</p>
+      <span class="post-more">Читать</span>
     </a>
-    <a class="card card-link" href="/how">
-      <h3>Как работает</h3>
-      <p class="muted small" style="margin-top:11px">Камера, звук, один день практики и что нужно для старта.</p>
+    <a class="card card-link post-card" href="/blog/anatomiya-akcenta">
+      <p class="post-meta">
+        <span><time datetime="2026-05-21">21 мая 2026</time></span>
+        <span>3 минуты</span>
+      </p>
+      <h2>Анатомия акцента: что происходит с речевым аппаратом, когда мы говорим на английском</h2>
+      <p class="muted">Как устройство нашего речевого аппарата и привычки родного языка ломают английские звуки.</p>
+      <span class="post-more">Читать</span>
     </a>
-    <a class="card card-link" href="/faq">
-      <h3>Вопросы</h3>
-      <p class="muted small" style="margin-top:11px">Уровень, время в день, зачем камера, когда откроется доступ.</p>
-    </a>
-    <a class="card card-link" href="/early-access">
-      <h3>Ранний доступ</h3>
-      <p class="muted small" style="margin-top:11px">Оставить почту, чтобы позвали в первую группу.</p>
-    </a>
-    <div class="card card-lilac">
-      <h3>Ничего из этого?</h3>
-      <p class="muted small" style="margin-top:11px">Напишите — подскажем, что искать, и починим ссылку, если она наша.</p>
-      <div class="btn-row" style="margin-top:15px"><a class="btn btn-ghost" href="mailto:info@bclearlab.ru">info@bclearlab.ru</a></div>
+  </div>
+</section>
+
+<section class="band-mint cta-band">
+  <div class="shell">
+    <h2>Хотите попробовать первыми?</h2>
+    <p class="lead" style="margin-top:16px;max-width:56ch">Мы открываем доступ небольшими группами. Оставьте почту, и мы напишем, когда дойдет очередь до вас.</p>
+    <div class="btn-row" style="margin-top:26px">
+      <a class="btn btn-ink btn-lg" href="/early-access">Получить ранний доступ</a>
+      <a class="btn btn-ghost btn-lg" href="/blog/">Другие статьи</a>
     </div>
   </div>
 </section>
@@ -180,6 +170,6 @@ ym(112385067,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
     </div>
   </div>
 </footer>
-<script src="assets/site.js"></script>
+<script src="/assets/site.js"></script>
 </body>
 </html>

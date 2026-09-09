@@ -1,11 +1,16 @@
 (function () {
   'use strict';
 
+  /* ---- черновики: показываем только по ?todo=1 в адресе ---- */
+  if (/[?&]todo\b/.test(window.location.search)) {
+    document.documentElement.classList.add('show-todo');
+  }
+
   /* ---- mobile nav ---- */
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.getElementById('nav');
   if (toggle && nav) {
-    var mq = window.matchMedia('(max-width: 900px)');
+    var mq = window.matchMedia('(max-width: 1000px)'); /* совпадает с брейкпоинтом .nav-toggle в site.css */
     var sync = function () {
       if (mq.matches) {
         nav.hidden = true;
@@ -58,7 +63,7 @@
     if (!('IntersectionObserver' in window)) { return; }
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { return; }
 
-    var GROUPS = '.grid, .pains, .rows, .layers, .principles, .flow, .wants, .reqs, .timeline, .form-grid, .pull-grid';
+    var GROUPS = '.grid, .rows, .layers, .principles, .flow, .wants, .reqs, .timeline, .form-grid, .pull-grid';
     var SOLO = '.head, .card, .table-wrap, .qa, .stage, .cta-band .shell';
     var main = document.getElementById('main');
     if (!main) { return; }
@@ -118,6 +123,10 @@
         err.textContent = 'Похоже, в адресе опечатка. Проверьте и попробуйте еще раз.';
         email.setAttribute('aria-invalid', 'true');
         email.focus();
+        // короткий сдвиг поля; класс снимаем, иначе вторая ошибка подряд не проиграет
+        email.classList.remove('is-invalid');
+        void email.offsetWidth;
+        email.classList.add('is-invalid');
         return;
       }
       err.textContent = '';
@@ -140,6 +149,7 @@
     email.addEventListener('input', function () {
       err.textContent = '';
       email.removeAttribute('aria-invalid');
+      email.classList.remove('is-invalid');
     });
   }
 })();
