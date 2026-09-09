@@ -138,7 +138,7 @@
       if (why) { lines.push('', 'Зачем произношение:', why); }
 
       window.location.href = 'mailto:info@bclearlab.ru'
-        + '?subject=' + encodeURIComponent('Ранний доступ — BClear Lab')
+        + '?subject=' + encodeURIComponent('Лист ожидания — BClear Lab')
         + '&body=' + encodeURIComponent(lines.join('\n'));
 
       form.dataset.sent = 'true';

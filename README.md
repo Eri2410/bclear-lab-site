@@ -12,24 +12,34 @@
 | `method.html` | Методика |
 | `how.html` | Как работает |
 | `faq.html` | Вопросы |
-| `early-access.html` | Ранний доступ |
+| `compare.html` | Сравнение с другими приложениями |
+| `early-access.html` | Лист ожидания |
+| `about.html` | Обо мне |
+| `blog/` | Блог: `index.html` и статьи |
 | `404.html` | Страница не найдена (GitHub Pages подхватывает автоматически) |
 
 ## Как посмотреть локально
 
 ```bash
-python3 -m http.server 8000
+python3 ../serve-site.py
 ```
 
-Дальше http://localhost:8000
+Дальше http://127.0.0.1:8765 — этот сервер повторяет роутинг GitHub Pages:
+`/about` отдает `about.html`, несуществующий путь отдает `404.html`.
 
 ## Что где
 
 - `assets/site.css` — все стили, дизайн-токены в `:root`
 - `assets/site.js` — мобильное меню, шапка при скролле, форма вейтлиста
 - `assets/logo-*.svg` — логотип
+- `assets/*.webp` + `assets/*.jpg` — фотографии. В разметке всегда пара:
+  `<picture><source srcset="assets/имя.webp" type="image/webp"><img src="assets/имя.jpg" width height alt></picture>`.
+  Браузер берет webp, jpg остается запасным. Добавляя новое фото, кладите оба
+  файла с одинаковым именем и не забывайте `width`/`height` на `img` — без них
+  верстка прыгает при загрузке
 - `assets/og.jpg` — превью для мессенджеров и соцсетей (1200×630), прописано
-  в `og:image` и `twitter:image` на всех страницах
+  в `og:image` и `twitter:image` на всех страницах. Остается JPEG: часть
+  соцсетей и мессенджеров не рисует webp в превью
 - `assets/og-source.html` — вёрстка этого превью. Чтобы пересобрать: открыть
   файл в браузере, снять элемент `#og` при deviceScaleFactor 2 (получится
   2400×1260) и уменьшить до 1200×630 в JPEG качества 92

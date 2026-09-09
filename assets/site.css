@@ -351,6 +351,21 @@ strong,b{font-weight:600}
 /* английское слово в тексте статьи (класс .pair занят блоком минимальных пар) */
 .article .en{font-weight:500;color:var(--ink);white-space:nowrap}
 
+/* иллюстрация в статье: по ширине колонки текста, подпись — отдельной
+   полосой на белом, как у карточек. Скругление держит внешний контейнер,
+   поэтому overflow режет и верх картинки, и низ подписи. */
+.post-figure{
+  margin:clamp(26px,3vw,38px) 0 0;
+  border-radius:var(--r-lg);overflow:hidden;
+  background:var(--ground-deep);box-shadow:var(--shadow-sm);
+}
+.post-figure img{display:block;width:100%;height:auto}
+.post-figure figcaption{
+  padding:clamp(12px,1.4vw,16px) clamp(14px,1.8vw,20px);
+  background:var(--card);
+  font-size:.875rem;line-height:1.5;color:var(--ink-3);
+}
+
 /* ---- три причины на «Обо мне» ---- */
 .reasons{list-style:none;margin:clamp(24px,3vw,32px) 0 0;padding:0;display:grid;gap:clamp(14px,1.6vw,20px)}
 /* журнальная сетка: слева тезис крупно, справа раскрытие мельче */
