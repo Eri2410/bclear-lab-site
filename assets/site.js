@@ -35,6 +35,50 @@
     });
   }
 
+  /* ---- выпадающий раздел меню ---- */
+  /* Один источник правды — aria-expanded на кнопке. На широком экране его
+     двигают наведение и клавиатура, на узком только нажатие: там наведения
+     нет, а залипший hover оставил бы список открытым навсегда. */
+  var groups = document.querySelectorAll('.nav-group');
+  if (groups.length) {
+    var wide = window.matchMedia('(min-width: 1001px)'); /* зеркало брейкпоинта меню */
+    var hoverable = window.matchMedia('(hover: hover)');
+
+    var open = function (btn, v) { btn.setAttribute('aria-expanded', String(v)); };
+    var opened = function (btn) { return btn.getAttribute('aria-expanded') === 'true'; };
+    var closeAll = function () {
+      Array.prototype.forEach.call(groups, function (g) {
+        open(g.querySelector('.nav-group-btn'), false);
+      });
+    };
+
+    Array.prototype.forEach.call(groups, function (group) {
+      var gbtn = group.querySelector('.nav-group-btn');
+
+      // Там, где есть настоящее наведение, состоянием уже управляет мышь:
+      // если и клик будет переключать, нажатие по открытому списку его закроет,
+      // а курсор все еще внутри — и обратно он не откроется. Поэтому клик
+      // работает только на тач-экранах и в узком меню.
+      gbtn.addEventListener('click', function () {
+        var was = opened(gbtn);
+        if (!hoverable.matches || !wide.matches) { closeAll(); open(gbtn, !was); }
+      });
+      // соседний раздел закрываем: два открытых списка перекрыли бы друг друга
+      group.addEventListener('mouseenter', function () { if (wide.matches) { closeAll(); open(gbtn, true); } });
+      group.addEventListener('mouseleave', function () { if (wide.matches) { open(gbtn, false); } });
+      group.addEventListener('focusin', function () { if (wide.matches) { closeAll(); open(gbtn, true); } });
+      group.addEventListener('focusout', function (e) {
+        if (wide.matches && !group.contains(e.relatedTarget)) { open(gbtn, false); }
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && opened(gbtn)) { open(gbtn, false); gbtn.focus(); }
+      });
+    });
+
+    // при смене ширины состояние сбрасываем: правила открытия здесь разные
+    wide.addEventListener('change', closeAll);
+  }
+
   /* ---- header hairline once scrolled ---- */
   var head = document.querySelector('.site-head');
   if (head) {
@@ -109,6 +153,21 @@
   })();
 
   /* ---- waitlist: no backend yet, so we compose a letter ---- */
+  /* Один скрипт обслуживает обе версии сайта, поэтому тексты письма и ошибки
+     берем по атрибуту lang у <html>: /en/* объявляет lang="en". */
+  var COPY = {
+    ru: {
+      err: 'Похоже, в адресе опечатка. Проверьте и попробуйте еще раз.',
+      subject: 'Лист ожидания — BClear Lab',
+      email: 'Почта', level: 'Уровень', goal: 'Зачем произношение:'
+    },
+    en: {
+      err: 'That address looks like a typo. Check it and try again.',
+      subject: 'Waitlist — BClear Lab',
+      email: 'Email', level: 'Level', goal: 'Why pronunciation matters to me:'
+    }
+  }[document.documentElement.lang === 'en' ? 'en' : 'ru'];
+
   var form = document.querySelector('form[data-waitlist]');
   if (form) {
     var email = form.querySelector('input[type="email"]');
@@ -120,7 +179,7 @@
       e.preventDefault();
       var value = email.value.trim();
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
-        err.textContent = 'Похоже, в адресе опечатка. Проверьте и попробуйте еще раз.';
+        err.textContent = COPY.err;
         email.setAttribute('aria-invalid', 'true');
         email.focus();
         // короткий сдвиг поля; класс снимаем, иначе вторая ошибка подряд не проиграет
@@ -132,13 +191,13 @@
       err.textContent = '';
       email.removeAttribute('aria-invalid');
 
-      var lines = ['Почта: ' + value];
-      if (level.value) { lines.push('Уровень: ' + level.value); }
+      var lines = [COPY.email + ': ' + value];
+      if (level.value) { lines.push(COPY.level + ': ' + level.value); }
       var why = goal.value.trim().slice(0, 900);
-      if (why) { lines.push('', 'Зачем произношение:', why); }
+      if (why) { lines.push('', COPY.goal, why); }
 
       window.location.href = 'mailto:info@bclearlab.ru'
-        + '?subject=' + encodeURIComponent('Лист ожидания — BClear Lab')
+        + '?subject=' + encodeURIComponent(COPY.subject)
         + '&body=' + encodeURIComponent(lines.join('\n'));
 
       form.dataset.sent = 'true';

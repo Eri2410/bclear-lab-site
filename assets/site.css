@@ -208,12 +208,57 @@ strong,b{font-weight:600}
 .nav{margin-left:auto;display:flex;align-items:center;gap:4px}
 .nav a{
   font-size:.925rem;font-weight:500;color:var(--ink-2);text-decoration:none;
-  padding:9px 14px;border-radius:999px;
+  padding:9px 12px;border-radius:999px;
+  /* пункт меню не переносится внутри себя: без этого «Как работает» и «В лист
+     ожидания» ломаются на две строки, как только пунктов становится много */
+  white-space:nowrap;flex:none;
   transition:background-color var(--t-1) ease,color var(--t-1) ease;
 }
 .nav a:hover{background:#fff;color:var(--ink)}
 .nav a[aria-current="page"]{background:var(--lilac);color:var(--lilac-ink);font-weight:600}
-.nav .btn{margin-left:8px;padding:11px 20px;font-size:.94rem;font-weight:600}
+.nav .btn{margin-left:8px;padding:11px 18px;font-size:.94rem;font-weight:600;white-space:nowrap}
+/* переключатель языка: это не пункт меню, а элемент управления,
+   поэтому контур вместо заливки — он не спорит с активной страницей */
+.nav a.lang-switch{
+  display:inline-flex;align-items:center;gap:7px;flex:none;
+  margin-left:8px;padding:8px 13px;
+  font-family:var(--f-display);font-size:.86rem;font-weight:600;letter-spacing:.05em;
+  color:var(--ink-2);
+  box-shadow:inset 0 0 0 1.5px var(--line-2);
+  transition:background-color var(--t-1) ease,color var(--t-1) ease,box-shadow var(--t-1) ease;
+}
+.nav a.lang-switch:hover{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink-3)}
+.nav a.lang-switch svg{width:15px;height:15px;flex:none}
+
+/* ---- выпадающий раздел в меню ---- */
+/* Состоянием владеет site.js через aria-expanded на кнопке: и наведение,
+   и клик, и клавиатура проходят через один атрибут. Поэтому здесь нет
+   ни :hover, ни :focus-within — иначе на тач-экране список залипал бы
+   открытым вопреки атрибуту. */
+.nav-group{position:relative;flex:none}
+.nav-group-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--f-text);font-size:.925rem;font-weight:500;color:var(--ink-2);
+  background:none;border:0;cursor:pointer;
+  padding:9px 12px;border-radius:999px;white-space:nowrap;
+  transition:background-color var(--t-1) ease,color var(--t-1) ease;
+}
+.nav-group-btn:hover{background:#fff;color:var(--ink)}
+/* раздел подсвечивается так же, как активный пункт, если открыта его страница */
+.nav-group[data-current="true"]>.nav-group-btn{background:var(--lilac);color:var(--lilac-ink);font-weight:600}
+.nav-caret{width:13px;height:13px;flex:none;transition:transform var(--t-2) var(--ease)}
+.nav-group-btn[aria-expanded="true"] .nav-caret{transform:rotate(180deg)}
+
+.nav-menu{
+  display:none;
+  position:absolute;top:calc(100% + 8px);left:0;min-width:236px;
+  background:#fff;border-radius:var(--r-md);padding:8px;box-shadow:var(--shadow-md);
+}
+/* мостик через зазор между кнопкой и списком: без него курсор по дороге
+   оказывается вне группы и список успевает закрыться */
+.nav-menu::before{content:"";position:absolute;left:0;right:0;top:-8px;height:8px}
+.nav-group-btn[aria-expanded="true"]+.nav-menu{display:grid;gap:2px}
+.nav .nav-menu a{display:block;padding:10px 12px;border-radius:var(--r-sm)}
 .nav-toggle{
   display:none;margin-left:auto;align-items:center;gap:9px;
   background:#fff;border:0;border-radius:999px;padding:10px 16px;cursor:pointer;
@@ -223,8 +268,10 @@ strong,b{font-weight:600}
 .nav-toggle:hover{box-shadow:var(--shadow-sm)}
 .nav-toggle:active{transform:translateY(1px);transition-duration:.06s}
 .nav-toggle svg{width:16px;height:16px}
-/* с пунктом «Блог» горизонтальное меню перестает помещаться раньше,
-   поэтому переключаемся на кнопку не с 900px, а с 1000px */
+/* Пункты «Блог», «Бизнесу» и переключатель языка не дают вернуться к прежним
+   900px: горизонтальному меню нужно около 940px ширины окна. Берем 1000px
+   с запасом. Это число продублировано в site.js дважды — у мобильного меню
+   и у выпадающего раздела. Правьте все три места вместе. */
 @media (max-width:1000px){
   .nav-toggle{display:inline-flex}
   .nav{
@@ -233,8 +280,13 @@ strong,b{font-weight:600}
     background:#fff;border-radius:var(--r-lg);padding:12px;box-shadow:var(--shadow-md);
   }
   .nav[hidden]{display:none}
-  .nav a{padding:12px 14px}
+  .nav a{padding:12px 14px;white-space:normal}
   .nav .btn{margin:8px 0 0}
+  .nav a.lang-switch{margin:8px 0 0;padding:11px 14px;justify-content:center}
+  .nav-group{position:static}
+  .nav-group-btn{width:100%;justify-content:space-between;padding:12px 14px}
+  .nav-menu{position:static;min-width:0;padding:2px 0 6px 14px;background:transparent;box-shadow:none}
+  .nav-menu::before{content:none}
 }
 
 /* ---- hero ---- */
@@ -569,7 +621,7 @@ form[data-sent="true"] .form-live{display:none}
    плотнее основного текста, поэтому в строку помещаются пять колонок */
 .foot-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.6fr);gap:clamp(30px,3.4vw,48px)}
 /* группы живут в своей сетке: их можно добавлять, не трогая внешнюю раскладку */
-.foot-links{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:30px 22px}
+.foot-links{display:grid;grid-template-columns:repeat(var(--foot-cols,5),minmax(0,1fr));gap:30px 22px}
 /* контакты — всегда крайняя правая колонка, на любой ширине */
 .foot-links>div:last-child{grid-column:-2/-1}
 @media (max-width:1000px){

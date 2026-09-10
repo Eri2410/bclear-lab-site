@@ -10,6 +10,9 @@
 <link rel="stylesheet" href="assets/site.css">
 <title>Обо мне — BClear Lab</title>
 <link rel="canonical" href="https://bclearlab.ru/about">
+<link rel="alternate" hreflang="ru" href="https://bclearlab.ru/about">
+<link rel="alternate" hreflang="en" href="https://bclearlab.ru/en/about">
+<link rel="alternate" hreflang="x-default" href="https://bclearlab.ru/about">
 <meta name="description" content="Элеонора Коновалова, автор BClear Lab: выпускница МГЛУ, с 2020 года работаю в проектах с компьютерным зрением, британское произношение ставила на курсе с accent-коучами. Почему делаю тренажер артикуляции.">
 <meta property="og:title" content="Обо мне — BClear Lab">
 <meta property="og:description" content="Элеонора Коновалова, автор BClear Lab: выпускница МГЛУ, с 2020 года работаю в проектах с компьютерным зрением, британское произношение ставила на курсе с accent-коучами. Почему делаю тренажер артикуляции.">
@@ -48,12 +51,24 @@ ym(112385067,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
       Меню
     </button>
     <nav class="nav" id="nav" aria-label="Основная навигация">
-      <a href="/why">Зачем</a>
-      <a href="/method">Методика</a>
-      <a href="/how">Как работает</a>
+      <div class="nav-group">
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-product">Продукт<svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-menu" id="nav-product">
+        <a href="/why">Зачем произношение</a>
+        <a href="/method">Методика</a>
+        <a href="/how">Как работает</a>
+        </div>
+      </div>
       <a href="/compare">Сравнение</a>
+      <div class="nav-group">
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-business">Бизнесу<svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-menu" id="nav-business">
+          <a href="/business">Программа обучения для компаний</a>
+        </div>
+      </div>
       <a href="/blog/">Блог</a>
       <a href="/about" aria-current="page">О команде</a>
+      <a class="lang-switch" href="/en/about" hreflang="en" lang="en" aria-label="Switch to English"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg> EN</a>
       <a class="btn btn-primary" href="/early-access">В лист ожидания</a>
     </nav>
   </div>
@@ -137,6 +152,7 @@ ym(112385067,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
             <li><a href="/why">Зачем произношение</a></li>
             <li><a href="/method">Методика</a></li>
             <li><a href="/how">Как работает</a></li>
+            <li><a href="/business">Бизнесу</a></li>
           </ul>
         </div>
         <div>
