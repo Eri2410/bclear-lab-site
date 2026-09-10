@@ -596,25 +596,6 @@ tbody tr:hover td{background:#FAFAFD}
 form[data-sent="true"] .form-ok{display:flex}
 form[data-sent="true"] .form-live{display:none}
 
-/* ---- placeholder marker ---- */
-/* Заглушки и черновики того, чего мы еще не знаем, посетителю не видны.
-   Чтобы посмотреть их самим, откройте страницу с ?todo=1 в адресе. */
-.todo,.todo-block{display:none}
-.show-todo .todo-block{display:block}
-.show-todo .todo{
-  display:inline-flex;align-items:center;gap:7px;
-  background:var(--lilac);color:var(--lilac-ink);
-  border-radius:7px;padding:2px 9px;font-size:.82rem;font-weight:600;
-  font-family:var(--f-text);
-}
-.band-ink .todo{background:rgba(217,194,251,.18);color:var(--lilac-2)}
-.todo-block{position:relative}
-.show-todo .todo-block::before{
-  content:"Черновик, посетителям не виден";
-  display:inline-flex;background:var(--lilac);color:var(--lilac-ink);
-  border-radius:7px;padding:2px 9px;font-size:.82rem;font-weight:600;margin-bottom:14px;
-}
-
 /* ---- footer ---- */
 .site-foot{padding-block:clamp(48px,6vw,74px) 34px}
 /* логотип с описанием слева, группы ссылок справа: набор в футере мельче и

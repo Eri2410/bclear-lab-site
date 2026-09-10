@@ -1,11 +1,6 @@
 (function () {
   'use strict';
 
-  /* ---- черновики: показываем только по ?todo=1 в адресе ---- */
-  if (/[?&]todo\b/.test(window.location.search)) {
-    document.documentElement.classList.add('show-todo');
-  }
-
   /* ---- mobile nav ---- */
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.getElementById('nav');
