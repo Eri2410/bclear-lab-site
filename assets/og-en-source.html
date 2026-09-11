@@ -57,7 +57,7 @@ h1{
 .ipa{font-family:"Noto Sans",var(--f-t)}
 
 .shot{position:relative;width:380px;height:398px;border-radius:16px;overflow:hidden;background:var(--ground)}
-/* Окно .shot показывает лицо целиком: участок og-face.jpg (1536x1024)
+/* Окно .shot показывает лицо целиком: участок face-full.jpg (1536x1024)
    от точки 317,20 размером 917x960 — от бровей до подбородка. Ширина
    .shot-inner задает масштаб: 636.5 / 1536 = 0.4144, смещения — та же
    точка в этом масштабе. Разметка в пикселях самого фото и едет за кадром. */
@@ -68,7 +68,15 @@ h1{
 .legend{margin:13px 0 0;display:flex;gap:20px;font-size:13.5px;color:var(--ink3)}
 .legend span{display:inline-flex;align-items:center;gap:8px}
 .legend i{display:block;width:20px;height:0;flex:none}
-.k-line{border-top:3px solid #3FD9BE}
+.legend .k-dot{width:7px;height:7px;border-radius:50%;background:#3FD9BE}
+/* Фото — кадр с фронтальной камеры пользователя, а не аватар коуча:
+   рамка телефона, вырез камеры и таймер записи. Таймер стоит слева,
+   чтобы не заезжать под вырез. */
+.shot{border:9px solid #14141B;border-radius:30px}
+.shot::before{content:"";position:absolute;top:5px;left:50%;transform:translateX(-50%);width:62px;height:15px;border-radius:99px;background:#14141B;z-index:3}
+.cam-rec{position:absolute;left:12px;top:12px;z-index:2;display:flex;align-items:center;gap:7px;
+  background:rgba(20,20,27,.62);color:#fff;font-size:12.5px;font-weight:500;line-height:1;padding:6px 11px 6px 9px;border-radius:99px}
+.cam-rec i{display:block;width:8px;height:8px;border-radius:50%;background:#FF3B4E}
 .k-goal{border-top:3px dashed var(--deep)}
 </style>
 </head>
@@ -103,19 +111,17 @@ h1{
   </div>
 
   <div class="panel">
-    <div class="panel-head"><strong>Attempt breakdown</strong><span class="tag"><span class="ipa">/uː/</span> in school</span></div>
+    <div class="panel-head"><strong>Your front camera</strong><span class="tag"><span class="ipa">/uː/</span> in school</span></div>
     <div class="shot">
+      <span class="cam-rec"><i></i>recording 0:04</span>
       <div class="shot-inner">
-        <img src="og-face.jpg" alt="">
-        <!-- viewBox совпадает с пикселями og-face.jpg: ломаная обводит губы
-             (x 657..899, y 568..764). 8.5 единицы — 3.5px на карточке. -->
-        <svg viewBox="0 0 1536 1024">
-          <path d="M730 558 826 558 895 603 912 668 882 740 818 776 738 776 670 740 644 668 663 603Z" fill="none" stroke="#64FFE3" stroke-width="8.5" stroke-linejoin="round"/>
-        </svg>
+        <img src="face-full.jpg" alt="">
+        <!-- разметка в пикселях face-full.jpg (1536x1024): точки по контуру губ, как у распознавания лиц -->
+        <svg viewBox="0 0 1536 1024"><defs><filter id="sh" x="-5%" y="-5%" width="110%" height="110%"><feDropShadow dx="0" dy="0" stdDeviation="2.2" flood-color="#00332B" flood-opacity=".55"/></filter></defs><g filter="url(#sh)"><g fill="none" stroke="#64FFE3" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" opacity=".9"><polygon points="650 662 690 600 735 572 775 580 815 572 862 600 902 662 870 715 825 745 772 754 720 745 678 715"/><polygon points="705 656 745 640 775 645 808 640 848 656 808 668 775 672 745 668"/></g><g fill="#64FFE3"><circle cx="650" cy="662" r="6.0"/><circle cx="690" cy="600" r="6.0"/><circle cx="735" cy="572" r="6.0"/><circle cx="775" cy="580" r="6.0"/><circle cx="815" cy="572" r="6.0"/><circle cx="862" cy="600" r="6.0"/><circle cx="902" cy="662" r="6.0"/><circle cx="870" cy="715" r="6.0"/><circle cx="825" cy="745" r="6.0"/><circle cx="772" cy="754" r="6.0"/><circle cx="720" cy="745" r="6.0"/><circle cx="678" cy="715" r="6.0"/><circle cx="705" cy="656" r="6.0"/><circle cx="745" cy="640" r="6.0"/><circle cx="775" cy="645" r="6.0"/><circle cx="808" cy="640" r="6.0"/><circle cx="848" cy="656" r="6.0"/><circle cx="808" cy="668" r="6.0"/><circle cx="775" cy="672" r="6.0"/><circle cx="745" cy="668" r="6.0"/></g></g></svg>
       </div>
     </div>
     <p class="legend">
-      <span><i class="k-line"></i>your articulation</span>
+      <span><i class="k-dot"></i>your articulation</span>
     </p>
   </div>
 </div>

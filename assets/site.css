@@ -709,8 +709,18 @@ form[data-sent="true"] .form-live{display:none}
 .hero-panel-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:13px}
 .hero-panel-head strong{font-family:var(--f-display);font-weight:600;font-size:.98rem}
 
-.hero-shot{position:relative;margin:0;line-height:0;border-radius:16px;overflow:hidden;background:var(--ground-deep)}
-.hero-shot img{display:block;width:100%;height:auto}
+/* Фото — кадр с фронтальной камеры пользователя, а не аватар коуча: телефон
+   повернут боком, поэтому вырез камеры на левом краю, а таймер сверху.
+   Кадр 4:3, чтобы панель помещалась в первый экран. object-fit обрезает
+   face-full.jpg (1536x1024) по центру, а svg с тем же viewBox и slice
+   обрезается так же — разметка стоит на губах при любой пропорции. */
+.hero-shot{position:relative;margin:0;line-height:0;border:9px solid #14141B;border-radius:30px;overflow:hidden;background:var(--ground-deep)}
+.hero-shot::before{content:"";position:absolute;left:6px;top:50%;transform:translateY(-50%);z-index:3;width:16px;height:64px;border-radius:99px;background:#14141B}
+.hero-shot img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:50% 50%}
+/* таймер сверху слева: вырез посередине левого края, они не пересекаются */
+.cam-rec{position:absolute;left:13px;top:13px;z-index:2;display:flex;align-items:center;gap:7px;
+  background:rgba(20,20,27,.62);color:#fff;font-size:.8rem;font-weight:500;line-height:1;padding:6px 11px 6px 9px;border-radius:99px}
+.cam-rec i{display:block;width:8px;height:8px;border-radius:50%;background:#FF3B4E}
 .hero-marks{position:absolute;inset:0;width:100%;height:100%}
 
 .scan-legend{
@@ -724,8 +734,7 @@ form[data-sent="true"] .form-live{display:none}
 }
 .scan-legend span{display:inline-flex;align-items:center;gap:8px}
 .scan-legend i{display:block;width:20px;height:0;flex:none}
-.scan-legend .k-now{border-top:3px solid var(--warn)}
-.scan-legend .k-goal{border-top:3px dashed var(--mint-deep)}
+.scan-legend .k-dot{width:8px;height:8px;border-radius:50%;background:#3FD9BE}
 
 .hero-readout{margin-top:13px;display:grid;gap:8px}
 .readout-row{display:grid;grid-template-columns:auto 1fr auto;gap:13px;align-items:center;font-size:.88rem}
