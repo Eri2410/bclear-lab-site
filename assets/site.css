@@ -400,6 +400,19 @@ strong,b{font-weight:600}
 }
 .article ul{margin:18px 0 0;padding-left:1.15em;display:grid;gap:10px;color:var(--ink-2);line-height:1.6}
 .article li::marker{color:var(--lilac-mid)}
+/* юридические страницы (/privacy, /consent): тот же набор статьи плюс
+   подзаголовки второго уровня, нумерованный список и таблицы */
+.doc>h2:first-child{margin-top:0}
+.doc h3{margin-top:26px;font-size:1.08rem;line-height:1.3;letter-spacing:-.01em}
+.doc h3+p{margin-top:10px}
+.doc ol{margin:18px 0 0;padding-left:1.3em;display:grid;gap:12px;color:var(--ink-2);line-height:1.6}
+.doc strong{color:var(--ink)}
+.doc code{font-size:.88em}
+/* таблица шире колонки текста не бывает, но на телефоне прокручивается сама, не страница */
+.doc-table{margin-top:18px;overflow-x:auto}
+.doc-table table{width:100%;border-collapse:collapse;font-size:.94rem;line-height:1.5;color:var(--ink-2)}
+.doc-table th,.doc-table td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.doc-table th{font-weight:600;color:var(--ink);background:var(--ground-deep)}
 /* английское слово в тексте статьи (класс .pair занят блоком минимальных пар) */
 .article .en{font-weight:500;color:var(--ink);white-space:nowrap}
 
@@ -641,14 +654,35 @@ tbody tr:hover td{background:#FAFAFD}
 .form-ok svg{width:22px;height:22px;color:var(--mint-deep);flex:none;margin-top:2px}
 form[data-sent="true"] .form-ok{display:flex}
 form[data-sent="true"] .form-live{display:none}
+/* галочка согласия: не отмечена заранее — согласие должно быть действием */
+.check{display:grid;grid-template-columns:20px minmax(0,1fr);gap:12px;align-items:start;font-size:.9rem;line-height:1.5;color:var(--ink-2);cursor:pointer}
+.check input{width:20px;height:20px;margin:1px 0 0;accent-color:var(--mint-deep);cursor:pointer}
+.check input[aria-invalid="true"]{outline:2px solid #A3243B;outline-offset:2px}
+
+/* ---- уведомление о cookie ----
+   Разметку добавляет site.js, пока посетитель не нажал кнопку. */
+.cookie{
+  position:fixed;left:16px;right:16px;bottom:16px;z-index:90;
+  max-width:600px;margin-inline:auto;
+  display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;
+  background:var(--ink);color:#EDEDF3;border-radius:var(--r-md);
+  padding:16px 18px 16px 22px;box-shadow:0 14px 40px rgba(20,20,45,.28);
+  font-size:.9rem;line-height:1.5;
+}
+.cookie p{flex:1 1 260px}
+.cookie a{color:var(--mint)}
+.cookie .btn{padding:11px 22px}
 
 /* ---- footer ---- */
 .site-foot{padding-block:clamp(48px,6vw,74px) 34px}
 /* логотип с описанием слева, группы ссылок справа: набор в футере мельче и
    плотнее основного текста, поэтому в строку помещаются пять колонок */
-.foot-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.6fr);gap:clamp(30px,3.4vw,48px)}
-/* группы живут в своей сетке: их можно добавлять, не трогая внешнюю раскладку */
-.foot-links{display:grid;grid-template-columns:repeat(var(--foot-cols,5),minmax(0,1fr));gap:30px 22px}
+.foot-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,3.4fr);gap:clamp(30px,3.4vw,48px)}
+/* группы живут в своей сетке: их можно добавлять, не трогая внешнюю раскладку.
+   --foot-flex — сколько групп делят ширину поровну; последняя группа (контакты)
+   берет ровно свою ширину, чтобы кнопка копирования стояла справа от почты.
+   Страница с тремя группами задает style="--foot-flex:2". */
+.foot-links{display:grid;grid-template-columns:repeat(var(--foot-flex,4),minmax(0,1fr)) max-content;gap:30px 22px}
 /* контакты — всегда крайняя правая колонка, на любой ширине */
 .foot-links>div:last-child{grid-column:-2/-1}
 @media (max-width:1000px){
@@ -668,6 +702,26 @@ form[data-sent="true"] .form-live{display:none}
 .site-foot li{font-size:.875rem;line-height:1.3}
 .site-foot a{color:#EDEDF3;text-decoration:none;transition:color var(--t-1) ease}
 .site-foot a:hover{color:var(--mint)}
+/* почта в футере с кнопкой копирования: по клику иконка на 1.8с меняется на
+   галочку. «Скопировано» в .copy-note слышит только скринридер (role=status) */
+/* ширина по содержимому; на совсем узком экране кнопка уходит под почту,
+   а не выталкивает страницу вбок */
+.foot-copy{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;justify-self:start;position:relative}
+.copy-btn{
+  display:inline-grid;place-items:center;width:26px;height:26px;flex:none;
+  padding:0;border:1px solid rgba(255,255,255,.16);border-radius:7px;
+  background:transparent;color:#9E9EAE;cursor:pointer;
+  transition:color var(--t-1) ease,border-color var(--t-1) ease,background var(--t-1) ease;
+}
+.copy-btn:hover{color:var(--mint);border-color:rgba(100,255,227,.45)}
+.copy-btn:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+.copy-btn svg{width:14px;height:14px;grid-area:1/1}
+.copy-btn .i-done{visibility:hidden}
+.copy-btn.is-copied{color:var(--mint);border-color:rgba(100,255,227,.45)}
+.copy-btn.is-copied .i-copy{visibility:hidden}
+.copy-btn.is-copied .i-done{visibility:visible}
+/* видимой подписи нет — зрячим хватает галочки; для скринридера текст остается */
+.copy-note{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 /* строка ýже своей колонки — за счет этого между описанием и ссылками остается воздух */
 .foot-about{margin-top:26px;color:#9E9EAE;max-width:34ch}
 .foot-bottom{
@@ -675,6 +729,8 @@ form[data-sent="true"] .form-live{display:none}
   display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center;
   font-size:.845rem;color:#8E8E9E;
 }
+.site-foot .foot-bottom a{color:inherit}
+.site-foot .foot-bottom a:hover{color:var(--mint)}
 
 
 /* ---- cta band ---- */

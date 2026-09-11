@@ -75,7 +75,7 @@ ym(112385067,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
       <div class="form-live">
         <div class="field">
           <label for="email">Email</label>
-          <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="email-err">
+          <input class="ym-disable-keys" id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="email-err">
           <p class="field-err" id="email-err" role="alert"></p>
         </div>
 
@@ -92,11 +92,17 @@ ym(112385067,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
 
         <div class="field" style="margin-top:18px">
           <label for="goal">Why you want to work on pronunciation</label>
-          <textarea id="goal" name="goal" rows="3" placeholder="For example: I work with British colleagues and I am tired of repeating myself and asking others to repeat"></textarea>
+          <textarea class="ym-disable-keys" id="goal" name="goal" rows="3" placeholder="For example: I work with British colleagues and I am tired of repeating myself and asking others to repeat"></textarea>
           <p class="form-note">Optional. It simply helps us get to know you.</p>
         </div>
 
-        <div class="btn-row" style="margin-top:24px">
+        <label class="check" style="margin-top:22px">
+          <input id="consent" name="consent" type="checkbox" required aria-describedby="consent-err">
+          <span>I consent to the <a href="/consent" target="_blank" rel="noopener" lang="ru">processing of my personal data</a> and accept the <a href="/privacy" target="_blank" rel="noopener" lang="ru">privacy policy</a> (both in Russian)</span>
+        </label>
+        <p class="field-err" id="consent-err" role="alert" style="margin-top:8px"></p>
+
+        <div class="btn-row" style="margin-top:18px">
           <button class="btn btn-primary btn-lg" type="submit">Write to us</button>
         </div>
         <p class="form-note" style="margin-top:14px">Your email app will open with the message already written — all that is left is to press Send. We only write back when there is something to say: when access opens.</p>
@@ -171,7 +177,7 @@ ym(112385067,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
           A personal AI coach for English pronunciation. It reads your articulation through the camera and your sound through the microphone, so you can lose the accent and speak with confidence.
         </p>
       </div>
-      <div class="foot-links" style="--foot-cols:3">
+      <div class="foot-links" style="--foot-flex:2">
         <div>
           <h4>Product</h4>
           <ul>
@@ -193,7 +199,7 @@ ym(112385067,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
         <div>
           <h4>Contact</h4>
           <ul>
-            <li><a href="mailto:info@bclearlab.ru">info@bclearlab.ru</a></li>
+            <li class="foot-copy"><a href="mailto:info@bclearlab.ru">info@bclearlab.ru</a><button class="copy-btn" type="button" data-copy="info@bclearlab.ru" aria-label="Copy email" title="Copy email"><svg class="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M15 9V6.5A2.5 2.5 0 0 0 12.5 4h-6A2.5 2.5 0 0 0 4 6.5v6A2.5 2.5 0 0 0 6.5 15H9"/></svg><svg class="i-done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7"/></svg></button><span class="copy-note" role="status"></span></li>
             <li><a href="https://t.me/eri_2410">Telegram</a></li>
           </ul>
         </div>
@@ -201,6 +207,7 @@ ym(112385067,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
     </div>
     <div class="foot-bottom">
       <span>© 2026 BClear Lab. All rights reserved</span>
+      <a href="/privacy" lang="ru">Privacy policy (in Russian)</a>
     </div>
   </div>
 </footer>

@@ -154,12 +154,16 @@
     ru: {
       err: 'Похоже, в адресе опечатка. Проверьте и попробуйте еще раз.',
       subject: 'Лист ожидания — BClear Lab',
-      email: 'Почта', level: 'Уровень', goal: 'Зачем произношение:'
+      email: 'Почта', level: 'Уровень', goal: 'Зачем произношение:',
+      consentErr: 'Отметьте согласие на обработку данных — тогда мы сможем вам написать.',
+      consent: 'Согласие на обработку персональных данных дано: bclearlab.ru/consent'
     },
     en: {
       err: 'That address looks like a typo. Check it and try again.',
       subject: 'Waitlist — BClear Lab',
-      email: 'Email', level: 'Level', goal: 'Why pronunciation matters to me:'
+      email: 'Email', level: 'Level', goal: 'Why pronunciation matters to me:',
+      consentErr: 'Tick the consent box so that we can write back to you.',
+      consent: 'Consent to personal data processing given: bclearlab.ru/consent'
     }
   }[document.documentElement.lang === 'en' ? 'en' : 'ru'];
 
@@ -168,7 +172,9 @@
     var email = form.querySelector('input[type="email"]');
     var level = form.querySelector('#level');
     var goal = form.querySelector('#goal');
-    var err = form.querySelector('.field-err');
+    var err = form.querySelector('#email-err');
+    var consent = form.querySelector('#consent');
+    var consentErr = form.querySelector('#consent-err');
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -186,10 +192,19 @@
       err.textContent = '';
       email.removeAttribute('aria-invalid');
 
+      if (consent && !consent.checked) {
+        consentErr.textContent = COPY.consentErr;
+        consent.setAttribute('aria-invalid', 'true');
+        consent.focus();
+        return;
+      }
+
       var lines = [COPY.email + ': ' + value];
       if (level.value) { lines.push(COPY.level + ': ' + level.value); }
       var why = goal.value.trim().slice(0, 900);
       if (why) { lines.push('', COPY.goal, why); }
+      // строка о согласии остается в письме: это и есть след того, что галочка стояла
+      if (consent) { lines.push('', COPY.consent); }
 
       window.location.href = 'mailto:info@bclearlab.ru'
         + '?subject=' + encodeURIComponent(COPY.subject)
@@ -205,5 +220,74 @@
       email.removeAttribute('aria-invalid');
       email.classList.remove('is-invalid');
     });
+
+    if (consent) {
+      consent.addEventListener('change', function () {
+        consentErr.textContent = '';
+        consent.removeAttribute('aria-invalid');
+      });
+    }
   }
+  /* ---- copy email in footer ---- */
+  /* запасной путь: браузер без Clipboard API или отказавший в доступе */
+  var copyLegacy = function (text) {
+    return new Promise(function (resolve, reject) {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      ok ? resolve() : reject();
+    });
+  };
+  var copyText = function (text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text).catch(function () { return copyLegacy(text); });
+    }
+    return copyLegacy(text);
+  };
+  var isEn = (document.documentElement.lang || '').indexOf('en') === 0;
+  document.querySelectorAll('.copy-btn[data-copy]').forEach(function (btn) {
+    var note = btn.parentNode.querySelector('.copy-note');
+    var timer;
+    btn.addEventListener('click', function () {
+      copyText(btn.getAttribute('data-copy')).then(function () {
+        btn.classList.add('is-copied');
+        if (note) note.textContent = isEn ? 'Copied' : 'Скопировано';
+      }, function () {
+        if (note) note.textContent = isEn ? 'Copy failed' : 'Не получилось скопировать';
+      });
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        btn.classList.remove('is-copied');
+        if (note) note.textContent = '';
+      }, 1800);
+    });
+  });
+
+  /* ---- уведомление о cookie ---- */
+  /* Метрика ставит cookie с первого захода, плашка сообщает об этом и ведет в
+     политику. Согласием считается продолжение работы с сайтом (п. 4 политики),
+     поэтому кнопка одна. Нажатие запоминаем в localStorage; если хранилище
+     недоступно, плашка просто покажется на следующей странице снова. */
+  (function () {
+    var KEY = 'bcl-cookie-ok';
+    try { if (localStorage.getItem(KEY)) { return; } } catch (e) {}
+    var bar = document.createElement('div');
+    bar.className = 'cookie';
+    bar.setAttribute('role', 'region');
+    bar.setAttribute('aria-label', isEn ? 'Cookie notice' : 'Уведомление о cookie');
+    bar.innerHTML = isEn
+      ? '<p>We use Yandex Metrica cookies to see which pages people read and what is worth improving. Details are in our <a href="/privacy" lang="ru">privacy policy (in Russian)</a>.</p>'
+        + '<button class="btn btn-primary" type="button">Got it</button>'
+      : '<p>Мы используем cookie Яндекс Метрики, чтобы понимать, какие страницы читают и что стоит улучшить. Подробнее — в <a href="/privacy">политике конфиденциальности</a>.</p>'
+        + '<button class="btn btn-primary" type="button">Понятно</button>';
+    document.body.appendChild(bar);
+    bar.querySelector('button').addEventListener('click', function () {
+      try { localStorage.setItem(KEY, '1'); } catch (e) {}
+      bar.remove();
+    });
+  })();
 })();
