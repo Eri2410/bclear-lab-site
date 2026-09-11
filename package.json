@@ -1,0 +1,9 @@
+{
+  "name": "bclear-lab-site",
+  "version": "1.0.0",
+  "description": "BClear Lab — лендинг тренажёра британского произношения",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  }
+}
