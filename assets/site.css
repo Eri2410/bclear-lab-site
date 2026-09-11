@@ -418,6 +418,52 @@ strong,b{font-weight:600}
   font-size:.875rem;line-height:1.5;color:var(--ink-3);
 }
 
+/* цитата из исследования, журнальная раскладка: кавычки висят в своей колонке,
+   оригинал набран дисплейным Jost и читается как сама цитата, перевод — обычным
+   текстом под ним, источник мелко после короткой черты. Кавычки — авторская SVG
+   в сиреневой паре: это наша разметка поверх чужого текста, как .ipa и .hl.
+   figcaption обязан быть последним ребенком figure, поэтому сетка плоская,
+   без обертки: иконка занимает первую колонку на все три строки. */
+.post-quote{
+  margin:clamp(24px,2.8vw,34px) 0 0;
+  padding:clamp(20px,2.4vw,28px) clamp(20px,2.6vw,32px);
+  background:var(--card);border-radius:var(--r-lg);
+  display:grid;grid-template-columns:auto minmax(0,1fr);
+  column-gap:clamp(14px,1.8vw,20px);align-items:start;
+}
+.post-quote .q-mark{
+  grid-row:1 / span 3;width:clamp(32px,3.2vw,40px);height:auto;margin-top:2px;
+  fill:var(--lilac);stroke:var(--lilac-ink);stroke-width:1.5;stroke-linejoin:round;
+  /* иконка Lucide нарисована закрывающими кавычками, а цитату открывают «66» */
+  transform:rotate(180deg);
+}
+.post-quote blockquote{
+  grid-column:2;margin:0;
+  font-family:var(--f-display);font-weight:500;
+  font-size:clamp(1.08rem,1.3vw,1.22rem);line-height:1.45;letter-spacing:-.005em;
+  color:var(--ink);text-wrap:pretty;
+}
+.post-quote .q-tr{grid-column:2;margin-top:12px;color:var(--ink-2);line-height:1.6}
+.post-quote figcaption{
+  grid-column:2;margin-top:16px;
+  display:flex;align-items:center;gap:10px;
+  font-size:.875rem;line-height:1.45;color:var(--ink-3);
+}
+.post-quote figcaption::before{content:"";flex:none;width:20px;height:1px;background:var(--line-2)}
+/* курсива у Jost не подключено, поэтому ударение в цитате держит цвет, а не наклон */
+.post-quote em{font-style:normal;color:var(--lilac-ink)}
+/* на узком экране кавычкам не хватает колонки: они встают над текстом */
+@media (max-width:560px){
+  .post-quote{grid-template-columns:minmax(0,1fr)}
+  .post-quote .q-mark{grid-row:auto;width:28px;margin:0 0 12px}
+  .post-quote blockquote,.post-quote .q-tr,.post-quote figcaption{grid-column:1}
+}
+/* источник в конце статьи */
+.post-source{
+  margin-top:clamp(28px,3vw,40px);padding-top:18px;border-top:1px solid var(--line-2);
+  font-size:.875rem;line-height:1.55;color:var(--ink-3);
+}
+
 /* ---- три причины на «Обо мне» ---- */
 .reasons{list-style:none;margin:clamp(24px,3vw,32px) 0 0;padding:0;display:grid;gap:clamp(14px,1.6vw,20px)}
 /* журнальная сетка: слева тезис крупно, справа раскрытие мельче */

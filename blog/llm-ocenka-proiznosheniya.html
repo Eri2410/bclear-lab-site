@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/assets/logo-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Golos+Text:wght@400;500;600&family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<title>Можно ли доверять LLM оценку произношения: исследование 2026 года — BClear Lab</title>
+<link rel="canonical" href="https://bclearlab.ru/blog/llm-ocenka-proiznosheniya">
+<meta name="description" content="Исследование 2026 года: большие языковые модели (LLM) в разборе произношения убедительно ошибаются в 2,5 раза чаще, чем обоснованно отвечают верно. Почему так происходит и как устроен специализированный ИИ-разбор, которому можно доверять.">
+<meta property="og:title" content="Можно ли доверять LLM оценку произношения: исследование 2026 года — BClear Lab">
+<meta property="og:description" content="Исследование 2026 года: большие языковые модели (LLM) в разборе произношения убедительно ошибаются в 2,5 раза чаще, чем обоснованно отвечают верно. Почему так происходит и как устроен специализированный ИИ-разбор, которому можно доверять.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://bclearlab.ru/blog/llm-ocenka-proiznosheniya">
+<meta property="og:site_name" content="BClear Lab">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://bclearlab.ru/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Заголовок «ИИ-коуч английского произношения» и кадр разбора: губы обведены красным контуром, мятным пунктиром показана эталонная форма звука">
+<meta property="article:published_time" content="2026-09-11">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Можно ли доверять LLM оценку произношения: исследование 2026 года — BClear Lab">
+<meta name="twitter:description" content="Исследование 2026 года: большие языковые модели (LLM) в разборе произношения убедительно ошибаются в 2,5 раза чаще, чем обоснованно отвечают верно. Почему так происходит и как устроен специализированный ИИ-разбор, которому можно доверять.">
+<meta name="twitter:image" content="https://bclearlab.ru/assets/og.jpg">
+<meta name="theme-color" content="#ECECF3">
+<!-- Разметка статьи для поиска и ИИ-ассистентов. При смене заголовка обновить headline. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "LLM врут? Хуже: они слышат не вас, а стереотип об иностранцах",
+  "description": "Исследование 2026 года: большие языковые модели (LLM) в разборе произношения убедительно ошибаются в 2,5 раза чаще, чем обоснованно отвечают верно. Почему так происходит и как устроен специализированный ИИ-разбор, которому можно доверять.",
+  "inLanguage": "ru",
+  "datePublished": "2026-09-11",
+  "dateModified": "2026-09-11",
+  "mainEntityOfPage": "https://bclearlab.ru/blog/llm-ocenka-proiznosheniya",
+  "image": "https://bclearlab.ru/assets/og.jpg",
+  "author": {
+    "@type": "Person",
+    "name": "Элеонора Коновалова",
+    "jobTitle": "Основательница BClear Lab",
+    "url": "https://bclearlab.ru/about"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BClear Lab",
+    "url": "https://bclearlab.ru/",
+    "logo": {"@type": "ImageObject", "url": "https://bclearlab.ru/assets/logo-full.svg"}
+  },
+  "about": ["оценка произношения", "большие языковые модели", "английское произношение"],
+  "citation": {
+    "@type": "ScholarlyArticle",
+    "name": "Prior over Evidence: Stereotype-Driven Diagnosis in LLM-Based L2 Pronunciation Feedback",
+    "author": [{"@type": "Person", "name": "Rong Wang"}, {"@type": "Person", "name": "Kun Sun"}],
+    "datePublished": "2026-06-13",
+    "identifier": "arXiv:2606.15325",
+    "url": "https://arxiv.org/abs/2606.15325"
+  }
+}
+</script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112385067,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:false});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112385067" style="position:absolute;left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<a class="skip" href="#main">К содержанию</a>
+<header class="site-head">
+  <div class="shell head-in">
+    <a class="brand" href="/" aria-label="BClear Lab — на главную">
+      <img src="/assets/logo-wordmark.svg" alt="BClear Lab" width="295" height="69">
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      Меню
+    </button>
+    <nav class="nav" id="nav" aria-label="Основная навигация">
+      <div class="nav-group">
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-product">Продукт<svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-menu" id="nav-product">
+        <a href="/why">Зачем произношение</a>
+        <a href="/method">Методика</a>
+        <a href="/how">Как работает</a>
+        </div>
+      </div>
+      <a href="/compare">Сравнение</a>
+      <div class="nav-group">
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-business">Бизнесу<svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-menu" id="nav-business">
+          <a href="/business">Программа обучения для компаний</a>
+          <a href="/schools">Программа для школ английского</a>
+        </div>
+      </div>
+      <a href="/blog/" aria-current="page">Блог</a>
+      <a href="/about">О команде</a>
+      <a class="lang-switch" href="/en/" hreflang="en" lang="en" aria-label="Switch to English"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg> EN</a>
+      <a class="btn btn-primary" href="/early-access">В лист ожидания</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="shell page-head post-head">
+  <span class="chip chip-lilac">Блог</span>
+  <h1 style="max-width:26ch;text-wrap:pretty">LLM врут? Хуже: они слышат не вас, а стереотип об иностранцах</h1>
+  <p class="post-meta" style="margin-top:20px">
+    <span><time datetime="2026-09-11">11 сентября 2026</time></span>
+    <span>6 минут</span>
+  </p>
+  <p class="lead post-lead">Если ваш текущий ИИ-репетитор пишет разбор произношения с помощью большой языковой модели (LLM), исследование 2026 года даёт повод его перепроверить. Учёные из Тюбингена и Шанхая выяснили, что такие модели убедительно ошибаются в два с половиной раза чаще, чем обоснованно отвечают верно.</p>
+</section>
+
+<section class="shell section-tight post-body">
+  <article class="article">
+    <p>Если вы хоть раз записывали фразу в голосовой режим чат-бота и просили оценить произношение, вы наверняка получали аккуратный разбор: какой звук не удался, где сместилось ударение, что стоит поправить. Такой ответ звучит как слова преподавателя, и ему хочется верить. На том же механизме строится всё больше приложений для тренировки речи: запись уходит в большую языковую модель, а обратно приходит текст с диагнозом. С этого наблюдения начинается исследование Rong Wang из Тюбингенского университета и Kun Sun из Университета Тунцзи, опубликованное в июне 2026 года.</p>
+
+    <figure class="post-quote">
+      <svg class="q-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/></svg>
+      <blockquote lang="en" cite="https://arxiv.org/abs/2606.15325"><p>Large language models are increasingly deployed for written pronunciation feedback in second-language (L2) English learning, under the assumption that their diagnoses are grounded in the supplied speech evidence rather than in priors from pretraining.</p></blockquote>
+      <p class="q-tr">Большие языковые модели всё чаще используют для письменной обратной связи по произношению в изучении английского как второго языка, исходя из допущения, что их диагноз опирается на предоставленную запись речи, а не на ожидания, усвоенные при обучении.</p>
+      <figcaption>Wang, Sun, 2026. Аннотация</figcaption>
+    </figure>
+
+    <p>Иначе говоря, все надеются, что модель слушает именно вас. Но у LLM есть второй источник знаний: из огромного количества текстов об изучении английского она знает, какие ошибки «обычно» делают иностранцы, и может выдать их, даже не вслушиваясь. <mark class="hl">Снаружи эти два режима не различить</mark>, и авторы говорят об этом прямо.</p>
+
+    <figure class="post-quote">
+      <svg class="q-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/></svg>
+      <blockquote lang="en" cite="https://arxiv.org/abs/2606.15325"><p>A grounded model and a prior-driven model are externally indistinguishable: both produce confident, fluent prose.</p></blockquote>
+      <p class="q-tr">Модель, которая опирается на данные, и модель, которая опирается на заученные ожидания, внешне неразличимы: обе выдают уверенный и гладкий текст.</p>
+      <figcaption>Wang, Sun, 2026. Раздел 1</figcaption>
+    </figure>
+
+    <p>Важно различать два типа систем. <mark class="hl">Универсальная LLM учится на текстах и умеет рассуждать о чём угодно</mark>, включая произношение. Специализированная <mark class="hl">система разбора речи учится на записях и сравнивает ваше произнесение с эталоном</mark>. Исследование проверяло первый тип.</p>
+
+    <h2>Как исследователи проверяли LLM</h2>
+
+    <p>Исследователи взяли корпус L2-ARCTIC, в котором 24 человека с шестью родными языками (арабским, хинди, корейским, китайским, испанским и вьетнамским) читают английские фразы, а лингвисты вручную отметили каждую ошибку в звуках и ударении. Из корпуса отобрали 1800 фраз и отдали их трём универсальным моделям, которые умеют работать с аудио: Gemini 3.0 Flash, GPT-4o и Qwen 3.5 Omni.</p>
+
+    <p>Каждая модель оценивала четыре стороны речи: темп, мелодику, ударение и отдельные звуки. Причём она не только <mark class="hl">ставила оценку</mark>, но и <mark class="hl">объясняла её, называя конкретные звуки или цифры, на которые опиралась</mark>. Входные данные меняли от минимальных, когда модель видела только текст фразы, родной язык и пол говорящего, до полных, когда она получала саму запись вместе с измеренными по ней параметрами голоса. Затем <mark class="hl">каждое объяснение сверяли с ручной разметкой</mark>: лингвисты оценили произношение каждого говорящего сами, заранее и независимо от моделей. Так удалось отделить убедительный ответ от верного.</p>
+
+    <h2>Можно ли доверять LLM оценку произношения?</h2>
+
+    <p>Судя по исследованию, пока нет: из логичных объяснений, которые давали LLM, больше двух третей вели к неверному выводу. В 55% ответов модели давали связное объяснение, но только в 16% случаев оно подкрепляло верную оценку, а в 40% за ним стоял неправильный вывод.</p>
+
+    <figure class="post-quote">
+      <svg class="q-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/></svg>
+      <blockquote lang="en" cite="https://arxiv.org/abs/2606.15325"><p>39.6% of judged cells contain internally coherent reasoning that supports a wrong rating, against only 15.8% where the reasoning supports a correct rating.</p></blockquote>
+      <p class="q-tr">В 39,6% проверенных случаев внутренне связное рассуждение подкрепляет неверную оценку, и лишь в 15,8% рассуждение подкрепляет верную.</p>
+      <figcaption>Wang, Sun, 2026. Аннотация</figcaption>
+    </figure>
+
+    <p>Для ученика это самая неудобная разновидность ошибки. Если приложение молчит, вы хотя бы продолжаете искать проблему сами. Если оно уверенно указывает не туда, вы <mark class="hl">тратите неделю тренировок на звук, который у вас и так в порядке</mark>, а настоящая ошибка остаётся на месте.</p>
+
+    <figure class="post-quote">
+      <svg class="q-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/></svg>
+      <blockquote lang="en" cite="https://arxiv.org/abs/2606.15325"><p>Misdirected feedback is more costly than no feedback because it consumes learner attention that would otherwise go to the real error.</p></blockquote>
+      <p class="q-tr">Обратная связь, которая указывает не туда, обходится дороже, чем её отсутствие, потому что забирает внимание ученика, которое иначе ушло бы на настоящую ошибку.</p>
+      <figcaption>Wang, Sun, 2026. Раздел 1, со ссылкой на Jeon et al., 2024</figcaption>
+    </figure>
+
+    <h2>Почему LLM говорит всем, что у них проблема с th?</h2>
+
+    <p>Потому что <mark class="hl">LLM называет ошибки по стереотипу, а не по записи вашего голоса</mark>: для говорящих на шести разных языках модели назвали одни и те же четыре звука. Если бы они действительно слушали запись, у говорящих на испанском и на корейском находились бы разные ошибки, ведь <mark class="hl">у каждого родного языка свои ловушки</mark>, и лингвисты описывают их с середины прошлого века. На деле в верхней части списка для всех оказались <span class="ipa">/θ/</span> как в <span class="en">think</span>, <span class="ipa">/ð/</span> как в <span class="en">this</span>, <span class="ipa">/r/</span> и <span class="ipa">/v/</span>. На <span class="ipa">/θ/</span>, <span class="ipa">/ð/</span> и <span class="ipa">/r/</span> пришлась треть всех ошибок, которые называли модели, хотя среди реальных ошибок их около 20%. Картина не менялась и тогда, когда модели получали саму запись.</p>
+
+    <p>При этом формальная точность выглядит отлично, около 95%. Объяснение простое: хоть одна неточность есть в 96% фраз, и ответ «ошибка есть» почти всегда совпадает с правдой. А вот <mark class="hl">назвать, в каком именно звуке она сидит, модели не могут</mark>, и тем более не могут научить произносить его правильно и проверить ваш прогресс.</p>
+
+    <figure class="post-quote">
+      <svg class="q-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/></svg>
+      <blockquote lang="en" cite="https://arxiv.org/abs/2606.15325"><p>The model can detect that <em>some</em> error exists but cannot ground <em>which</em> phone was mispronounced.</p></blockquote>
+      <p class="q-tr">Модель может определить, что <em>какая-то</em> ошибка есть, но не может обосновать, <em>какой именно</em> звук произнесён неправильно.</p>
+      <figcaption>Wang, Sun, 2026. Раздел 4.4</figcaption>
+    </figure>
+
+    <p>Для русскоязычных учеников это особенно коварно. Межзубные звуки и английский <span class="ipa">/r/</span> нам действительно даются тяжело, поэтому стереотипный ответ выглядит правдоподобно, и заметить, что модель вас не слушала, гораздо труднее. Если вы уже поставили <span class="en">th</span>, вам всё равно будут про него напоминать.</p>
+
+    <h2>Почему LLM находит ошибки в ударении почти у всех?</h2>
+
+    <p>Потому что <mark class="hl">модель видит пометку «иностранец» и ставит ошибку заранее</mark>. Уже в самом простом режиме, когда LLM видела только текст фразы и сведения о говорящем, она отмечала ошибку в ударении в 82–96% фраз, хотя на самом деле ошибка была в 4%.</p>
+
+    <p>Чтобы проверить, откуда берётся перекос, исследователи провели простой опыт: оставили модели те же данные, но <mark class="hl">запретили опираться на родной язык и пол говорящего</mark>. Если бы LLM действительно слушала запись, от такого запрета ничего бы не изменилось. Изменилось многое: <mark class="hl">точность оценки ударения выросла в несколько раз</mark>, с 0,08–0,14 до 0,40–0,65 по шкале от нуля до единицы.</p>
+
+    <figure class="post-quote">
+      <svg class="q-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/></svg>
+      <blockquote lang="en" cite="https://arxiv.org/abs/2606.15325"><p>Obviously, the model was not listening to the speech; it was seeing “L2 learner” and assuming errors.</p></blockquote>
+      <p class="q-tr">Очевидно, модель не слушала речь: она видела пометку «изучает английский как второй язык» и заранее предполагала ошибки.</p>
+      <figcaption>Wang, Sun, 2026. Раздел 4.5</figcaption>
+    </figure>
+
+    <p>Ещё нагляднее это видно на мелодике речи. Среди стереотипов, которые модели усвоили из текстов, есть и такой: мужчины говорят монотонно. Пока пол говорящего был виден, LLM так и отвечали, <mark class="hl">называя мужчин монотонными даже тогда, когда разметка показывала живую интонацию</mark>. Мелодику женских голосов модели оценивали точнее, чем мужских, на 0,16–0,24 пункта по той же шкале. Когда <mark class="hl">пол скрыли</mark>, разрыв перевернулся: теперь на 0,13–0,27 пункта точнее стали оценки мужчин. <mark class="hl">Голоса остались теми же, а стереотип исчез вместе с пометкой</mark>.</p>
+
+    <figure class="post-quote">
+      <svg class="q-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/></svg>
+      <blockquote lang="en" cite="https://arxiv.org/abs/2606.15325"><p>The model was responding to the gender tag, not to the speaker’s actual pitch.</p></blockquote>
+      <p class="q-tr">Модель реагировала на пометку пола, а не на реальную высоту голоса говорящего.</p>
+      <figcaption>Wang, Sun, 2026. Раздел 4.5</figcaption>
+    </figure>
+
+    <h2>Помогает ли LLM, если дать ей саму запись?</h2>
+
+    <p>Почти нет: обоснованных ответов прибавлялось, только когда модель получала измерения, посчитанные из записи отдельной программой. Лучше всего это видно на мелодике речи. С одной записью доля обоснованных оценок почти не росла. Когда же модели давали минимальную и максимальную высоту голоса числами, стереотипный ответ «монотонно» почти исчез, а доля обоснованных оценок выросла с 0,18 до 0,45–0,62.</p>
+
+    <figure class="post-quote">
+      <svg class="q-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/></svg>
+      <blockquote lang="en" cite="https://arxiv.org/abs/2606.15325"><p>The same audio waveform without textualised F0 values does not reproduce the lift.</p></blockquote>
+      <p class="q-tr">Та же звуковая волна без значений высоты голоса, записанных текстом, такого роста не даёт.</p>
+      <figcaption>Wang, Sun, 2026. Аннотация. F0 в оригинале обозначает частоту основного тона, то есть высоту голоса</figcaption>
+    </figure>
+
+    <p>С ударением и отдельными звуками не помогли никакие данные. Чтобы понять, где ошибка, <mark class="hl">нужно сопоставить, как слово должно звучать, с тем, как вы его произнесли на самом деле</mark>, звук за звуком. Ни запись целиком, ни общие цифры по фразе такого сопоставления не содержат, и модель заполняет пробел тем, что знает об иностранцах вообще.</p>
+
+    <figure class="post-quote">
+      <svg class="q-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/></svg>
+      <blockquote lang="en" cite="https://arxiv.org/abs/2606.15325"><p>When explicit acoustic evidence is absent or difficult to parse, LLMs do not fail gracefully by expressing uncertainty; instead, they default to demographic and pedagogical priors ingrained during pretraining.</p></blockquote>
+      <p class="q-tr">Когда явных акустических данных нет или их трудно разобрать, языковые модели не признают свою неуверенность, а откатываются к демографическим и педагогическим стереотипам, усвоенным при обучении.</p>
+      <figcaption>Wang, Sun, 2026. Раздел 5</figcaption>
+    </figure>
+
+    <h2>Какому ИИ-разбору произношения можно доверять?</h2>
+
+    <p>Тому, где ошибку находит <mark class="hl">специализированная система</mark>, которая сравнивает ваше произнесение с эталоном, а языковая модель только объясняет результат понятными словами. Авторы исследования не предлагают отказаться от LLM, они предлагают поменять её роль.</p>
+
+    <figure class="post-quote">
+      <svg class="q-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/></svg>
+      <blockquote lang="en" cite="https://arxiv.org/abs/2606.15325"><p>A more robust design uses specialised acoustic models for target-to-realisation alignment and deploys LLMs strictly as downstream natural-language interfaces.</p></blockquote>
+      <p class="q-tr">Более надёжная архитектура использует специализированные акустические модели, чтобы сопоставлять эталон с реальным произнесением, а языковые модели оставляет только как интерфейс, который переводит результат на человеческий язык.</p>
+      <figcaption>Wang, Sun, 2026. Раздел 5</figcaption>
+    </figure>
+
+    <p>BClear Lab тоже использует ИИ, но ошибку в нём находит не языковая модель, а сравнение вашей попытки с эталоном (это <mark class="hl">собственная технология на основе компьютерного зрения и моделей анализа звуковой волны</mark>): камера фиксирует положение губ и челюсти, а звук сверяется с образцом. Вы повторяете фразу за эталоном, и подсказка появляется из этого сравнения, поэтому она касается <mark class="hl">вашей попытки, а не типичного иностранца</mark>: если губы недостаточно округлились на <span class="ipa">/uː/</span>, вы узнаете именно это. Ваш родной язык и пол в разбор не попадают, потому что, как показало исследование, такие пометки перевешивают саму запись.</p>
+
+    <p>Камера добавляет то, чего нет даже у хорошей акустической модели. Звук показывает результат, а положение губ и челюсти показывает причину, поэтому вместо оценки «звук неточный» вы получаете инструкцию, что сделать ртом в следующей попытке. Чем такой подход отличается от других приложений, подробно написано на <a href="/compare">странице сравнения</a>.</p>
+
+    <h2>Как проверить, слушает ли вас ИИ-репетитор?</h2>
+
+    <p>Попросите его назвать звук, в котором вы ошиблись, и проверьте ответ на звуке, который у вас уже получается хорошо. Если репетитор продолжает его критиковать, он слушает не вас, а свои ожидания. Высокая общая точность здесь ничего не доказывает, и авторы исследования называют её иллюзией.</p>
+
+    <figure class="post-quote">
+      <svg class="q-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/></svg>
+      <blockquote lang="en" cite="https://arxiv.org/abs/2606.15325"><p>High F1 is an illusion of competence.</p></blockquote>
+      <p class="q-tr">Высокий F1 (так называется одна из метрик точности) создаёт иллюзию компетентности.</p>
+      <figcaption>Wang, Sun, 2026. Раздел 5</figcaption>
+    </figure>
+
+    <p>Поэтому спрашивайте не о том, насколько точно приложение оценивает речь, а о том, <mark class="hl">может ли оно назвать звук, в котором вы ошиблись</mark>, и объяснить, что сделать иначе. Этот же тест мы предлагаем применять и к нам.</p>
+
+    <p>BClear Lab устроен так, чтобы его проходить. Универсальный ИИ-чат или приложение, построенное на LLM, получает вашу запись и во многом пересказывает, какие ошибки обычно делают русскоязычные. Наш тренажёр сравнивает конкретную попытку с эталоном и через камеру видит, что при этом делали губы и челюсть. Поэтому он может сказать то, чего LLM не умеет: <mark class="hl">в каком звуке ошибка, что сделать ртом, чтобы её исправить, и получилось ли у вас в следующей попытке</mark>. Если <span class="en">th</span> у вас уже получается, мы не станем про него напоминать и займёмся тем звуком, который действительно мешает вас понимать.</p>
+
+    <p class="post-source">Исследование: Rong Wang, Kun Sun. <a href="https://arxiv.org/abs/2606.15325" lang="en">Prior over Evidence: Stereotype-Driven Diagnosis in LLM-Based L2 Pronunciation Feedback</a>. arXiv:2606.15325, 2026. Цитаты приведены в оригинале и в нашем переводе.</p>
+  </article>
+
+  <div class="card author">
+    <span class="author-photo"><picture><source srcset="/assets/eleonora.webp" type="image/webp"><img src="/assets/eleonora.jpg" width="1538" height="890" loading="lazy" decoding="async" alt="Элеонора Коновалова"></picture></span>
+    <div>
+      <p class="author-name">Элеонора Коновалова</p>
+      <p class="author-role">Основательница BClear Lab</p>
+      <p class="author-bio">Выпускница МГЛУ им. Мориса Тореза по специальности переводчика. С 2020 года работает в IT-проектах с компьютерным зрением. Британское произношение ставила на курсе с профессиональными accent-коучами. <a href="/about">Подробнее об авторе</a></p>
+    </div>
+  </div>
+
+  <div class="card card-lilac post-cta">
+    <h3>Хотите попробовать первыми?</h3>
+    <p style="margin-top:12px;max-width:64ch">Мы открываем доступ небольшими группами, чтобы успевать поговорить с каждым, кто пришел, и чинить то, что мешает заниматься каждый день. Оставьте почту — напишем, когда придет ваша очередь.</p>
+    <p style="margin-top:18px">
+      <a class="btn btn-ink" href="/early-access">Встать в лист ожидания</a>
+    </p>
+  </div>
+  <p style="margin-top:clamp(30px,3.4vw,44px)">
+    <a class="post-more" href="/blog/">Все статьи</a>
+  </p>
+</section>
+
+
+</main>
+
+<footer class="band-ink site-foot">
+  <div class="shell">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="/assets/logo-full-light.svg" alt="BClear Lab — your AI pronunciation coach" width="295" height="84">
+        <p class="small foot-about">
+          Персональный ИИ-коуч английского произношения. С помощью камеры и микрофона анализирует мимику и звук, помогая убрать акцент и говорить уверенно без стресса.
+        </p>
+      </div>
+      <div class="foot-links">
+        <div>
+          <h4>О продукте</h4>
+          <ul>
+            <li><a href="/why">Зачем произношение</a></li>
+            <li><a href="/method">Методика</a></li>
+            <li><a href="/how">Как работает</a></li>
+            <li><a href="/business">Бизнесу</a></li>
+            <li><a href="/schools">Школам английского</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Сравнение</h4>
+          <ul>
+            <li><a href="/compare">Все сравнения</a></li>
+            <li><a href="/compare#elsa">ELSA Speak</a></li>
+            <li><a href="/compare#speakerly">Speakerly</a></li>
+            <li><a href="/compare#boldvoice">BoldVoice</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Материалы</h4>
+          <ul>
+            <li><a href="/blog/">Блог</a></li>
+            <li><a href="/blog/llm-ocenka-proiznosheniya">LLM и произношение</a></li>
+            <li><a href="/blog/slushay-i-povtoryay">Успех в тренировке мышц</a></li>
+            <li><a href="/blog/ne-slyshim-beglu-rech">Восприятие речи</a></li>
+            <li><a href="/blog/anatomiya-akcenta">Анатомия акцента</a></li>
+            <li><a href="/faq">Вопросы</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Компания</h4>
+          <ul>
+            <li><a href="/about">О команде</a></li>
+            <li><a href="/early-access">Лист ожидания</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Связаться</h4>
+          <ul>
+            <li><a href="mailto:info@bclearlab.ru">info@bclearlab.ru</a></li>
+            <li><a href="https://t.me/eri_2410">Telegram</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 BClear Lab. Все права защищены</span>
+    </div>
+  </div>
+</footer>
+<script src="/assets/site.js"></script>
+</body>
+</html>
