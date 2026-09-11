@@ -1,0 +1,13 @@
+# Служебные файлы репозитория не попадают на сайт
+.git
+.gitignore
+.gstack
+.DS_Store
+**/.DS_Store
+.nojekyll
+.dockerignore
+Dockerfile
+nginx.conf
+CNAME
+README.md
+DEPLOY.md
