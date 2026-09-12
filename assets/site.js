@@ -5,7 +5,7 @@
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.getElementById('nav');
   if (toggle && nav) {
-    var mq = window.matchMedia('(max-width: 1000px)'); /* совпадает с брейкпоинтом .nav-toggle в site.css */
+    var mq = window.matchMedia('(max-width: 1060px)'); /* совпадает с брейкпоинтом .nav-toggle в site.css */
     var sync = function () {
       if (mq.matches) {
         nav.hidden = true;
@@ -36,7 +36,7 @@
      нет, а залипший hover оставил бы список открытым навсегда. */
   var groups = document.querySelectorAll('.nav-group');
   if (groups.length) {
-    var wide = window.matchMedia('(min-width: 1001px)'); /* зеркало брейкпоинта меню */
+    var wide = window.matchMedia('(min-width: 1061px)'); /* зеркало брейкпоинта меню */
     var hoverable = window.matchMedia('(hover: hover)');
 
     var open = function (btn, v) { btn.setAttribute('aria-expanded', String(v)); };

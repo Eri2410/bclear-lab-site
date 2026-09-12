@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/assets/logo-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="/assets/site.css">
+<title>Что происходит с видео с камеры — BClear Lab</title>
+<link rel="canonical" href="https://bclearlab.ru/privacy-explained/">
+<meta name="description" content="Видео не записывается, распознавание идет прямо в браузере, на сервер не уходит ни кадров, ни точек лица. Разбираем по пунктам, что происходит с камерой и записями в тренажере.">
+<meta property="og:title" content="Что происходит с видео с камеры — BClear Lab">
+<meta property="og:description" content="Видео не записывается, распознавание идет прямо в браузере, на сервер не уходит ни кадров, ни точек лица. Разбираем по пунктам, что происходит с камерой и записями в тренажере.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bclearlab.ru/privacy-explained/">
+<meta property="og:site_name" content="BClear Lab">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://bclearlab.ru/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Заголовок «ИИ-коуч английского произношения» и кадр разбора: губы обведены красным контуром, мятным пунктиром показана эталонная форма звука">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Что происходит с видео с камеры — BClear Lab">
+<meta name="twitter:description" content="Видео не записывается, распознавание идет прямо в браузере, на сервер не уходит ни кадров, ни точек лица. Разбираем по пунктам, что происходит с камерой и записями в тренажере.">
+<meta name="twitter:image" content="https://bclearlab.ru/assets/og.jpg">
+<meta name="theme-color" content="#ECECF3">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112385067,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:false});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112385067" style="position:absolute;left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head><body>
+<a class="skip" href="#main">К содержанию</a>
+<header class="site-head">
+  <div class="shell head-in">
+    <a class="brand" href="/" aria-label="BClear Lab — на главную">
+      <img src="/assets/logo-wordmark.svg" alt="BClear Lab" width="295" height="69">
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      Меню
+    </button>
+    <nav class="nav" id="nav" aria-label="Основная навигация">
+      <div class="nav-group">
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-product">Продукт<svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-menu" id="nav-product">
+        <a href="/why/">Зачем произношение</a>
+        <a href="/method/">Методика</a>
+        <a href="/how/">Как работает</a>
+        </div>
+      </div>
+      <a href="/compare/">Сравнение</a>
+      <div class="nav-group">
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-business">Бизнесу<svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-menu" id="nav-business">
+          <a href="/business/">Программа обучения для компаний</a>
+          <a href="/schools/">Программа для школ английского</a>
+        </div>
+      </div>
+      <a href="/blog/">Блог</a>
+      <a href="/about/">О команде</a>
+      <a class="nav-login" href="https://app.bclearlab.ru/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 4.5H6.5A2.5 2.5 0 0 0 4 7v10a2.5 2.5 0 0 0 2.5 2.5H10"/><path d="M15 8.5 19 12l-4 3.5M19 12H9.5"/></svg> Войти</a>
+      <a class="lang-switch" href="/en/" hreflang="en" lang="en" aria-label="Switch to English"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg> EN</a>
+      <a class="btn btn-primary" href="/early-access/">В лист ожидания</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="shell page-head">
+  <span class="chip chip-lilac">Приватность</span>
+  <h1>Что происходит с видео с вашей камеры</h1>
+  <p class="lead">Политику конфиденциальности читают редко, а вопрос «куда денется мое лицо» возникает у всех. Поэтому здесь то же самое человеческим языком: чего обычно опасаются, что происходит на самом деле и почему опасение закрыто.</p>
+</section>
+
+<section class="shell section-tight" style="max-width:900px">
+  <div class="card card-mint">
+    <h2 style="font-size:1.22rem">Если совсем коротко</h2>
+    <ul class="ticks" style="margin-top:20px">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7"/></svg><span>Тренажер смотрит на рот: для разбора нужны форма губ и раскрытие челюсти, а не лицо целиком. Карту лица мы не собираем — у нас нет ни одного числа с вашего лица.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7"/></svg><span>Видео не записывается ни на секунду: в тренажере нет даже того средства, которым браузер записывает видео.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7"/></svg><span>Каждый кадр превращается в набор чисел прямо в вашем браузере и сразу исчезает.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7"/></svg><span>На наш сервер не уходит ни кадров, ни точек лица, ни оценок: во время тренировки приложение вообще не обращается к сети.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7"/></svg><span>Счетчиков и аналитики внутри тренажера нет.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7"/></svg><span>Записи попыток хранятся в памяти браузера на вашем устройстве. Скачиваете и удаляете их вы сами.</span></li>
+    </ul>
+  </div>
+  <p class="small muted" style="margin-top:18px;max-width:72ch">Дальше то же самое подробно: семь опасений, которые звучат чаще всего, и что за каждым из них стоит на самом деле.</p>
+</section>
+
+<section class="shell section-tight">
+  <div class="head">
+    <h2>Семь опасений по порядку</h2>
+  </div>
+  <ol class="reasons">
+
+    <li class="card reason">
+      <div class="reason-head">
+        <span class="reason-n" aria-hidden="true">1</span>
+        <p class="reason-thesis">«Меня пишут на видео»</p>
+      </div>
+      <div class="reason-body stack" style="--gap:14px">
+        <p>Видео не создается ни на секунду. Картинка с камеры живет только в открытой вкладке браузера: она показывается вам на экране и покадрово уходит в распознавание. Ни файла, ни записи в приложении нет — в нем нет даже того средства, которым браузер записывает видео.</p>
+        <p>От кадра остаются только числа, которые выдало распознавание, а сам кадр исчезает. В разбор из них идет рот: форма губ и раскрытие челюсти — об этом пункт 6. Хранить нечего, потому что видео не появилось.</p>
+      </div>
+    </li>
+
+    <li class="card reason">
+      <div class="reason-head">
+        <span class="reason-n" aria-hidden="true">2</span>
+        <p class="reason-thesis">«Моя запись уходит к вам на сервер»</p>
+      </div>
+      <div class="reason-body stack" style="--gap:14px">
+        <p>Обычно приложение с камерой отправляет данные на сервер, и дальше человек не контролирует ничего. Здесь наоборот: пока вы занимаетесь, тренажер не обращается к сети. В нем нет ни одного запроса, который отправлял бы что-то наружу. Распознавание лица идет в самом браузере — модель скачивается один раз вместе со страницей и дальше работает на вашем устройстве, на видеокарте или процессоре.</p>
+        <p>Сервер отдает страницу и проверяет пароль от закрытого теста, на этом его роль заканчивается. Ни кадров, ни точек, ни оценок он не получает: их некому отправить.</p>
+      </div>
+    </li>
+
+    <li class="card reason">
+      <div class="reason-head">
+        <span class="reason-n" aria-hidden="true">3</span>
+        <p class="reason-thesis">«Данные уедут за границу»</p>
+      </div>
+      <div class="reason-body stack" style="--gap:14px">
+        <p>Библиотеки распознавания обычно тянут модели с зарубежных серверов и попутно отправляют туда служебную статистику. У нас и модель, и движок, и шрифты лежат на нашем сервере в России, к Google приложение не обращается.</p>
+        <p>При этом сама библиотека распознавания все же пытается раз в минуту отправить служебную статистику на адрес Google, и настройкой это не отключается. Поэтому сервер присылает браузеру строгое правило: соединяться разрешено только с адресом тренажера. Попытку блокирует сам браузер, а не наша вежливая просьба.</p>
+      </div>
+    </li>
+
+    <li class="card reason">
+      <div class="reason-head">
+        <span class="reason-n" aria-hidden="true">4</span>
+        <p class="reason-thesis">«Вы следите за мной аналитикой»</p>
+      </div>
+      <div class="reason-body stack" style="--gap:14px">
+        <p>Ни Яндекс Метрики, ни Google Analytics, ни любых других счетчиков в тренажере нет — ни на странице входа, ни внутри тренировки. От поисковиков он закрыт. Внутри нечего отключать, потому что нечего и настраивать.</p>
+        <p>Счетчик работает только на этом сайте: это другой адрес и другая история, и что именно он собирает, описано в <a href="/privacy/">политике конфиденциальности</a>.</p>
+      </div>
+    </li>
+
+    <li class="card reason">
+      <div class="reason-head">
+        <span class="reason-n" aria-hidden="true">5</span>
+        <p class="reason-thesis">«Мои записи лежат у вас в базе»</p>
+      </div>
+      <div class="reason-body stack" style="--gap:14px">
+        <p>«Записи хранятся в облаке» означает, что их видит и владелец облака, и его подрядчики. У нас записи лежат в хранилище браузера на том устройстве, где вы их сделали, и никакой синхронизации нет.</p>
+        <p>На вкладке «Записи» вы видите весь список, можете скачать его одним файлом и удалить все кнопкой. Само по себе ничего не отправляется и не удаляется. Мы просим у браузера разрешение не стирать это хранилище, но доступа к нему взамен не получаем.</p>
+      </div>
+    </li>
+
+    <li class="card reason">
+      <div class="reason-head">
+        <span class="reason-n" aria-hidden="true">6</span>
+        <p class="reason-thesis">«Из точек лица сделают дипфейк или обойдут разблокировку по лицу»</p>
+      </div>
+      <div class="reason-body stack" style="--gap:14px">
+        <p>Тренажер работает с ртом, а не с лицом. В разбор идут около десяти относительных чисел: ширина рта, насколько он раскрыт, отношение раскрытия к ширине, расстояние от носа до подбородка, толщина губ, высота уголков рта. Перед этим точки центруются, делятся на расстояние между зрачками и разворачиваются анфас, так что размер лица и его положение в кадре исчезают. Остается форма движения: восстановить по этим числам внешность, собрать дипфейк или обойти разблокировку по лицу нельзя.</p>
+        <p>Полная карта лица нужна библиотеке распознавания на один шаг — найти на кадре рот и понять, как повернута голова. В обычной тренировке она нигде не сохраняется и исчезает вместе с кадром: в память браузера ложатся только числа про рот и ваш прогресс. Целиком карту сохраняет одна вкладка «Записи», если вы ею пользуетесь, и тоже в вашем браузере — об этом пункты 1, 2 и 5.</p>
+      </div>
+    </li>
+
+    <li class="card reason">
+      <div class="reason-head">
+        <span class="reason-n" aria-hidden="true">7</span>
+        <p class="reason-thesis">«Меня слушают»</p>
+      </div>
+      <div class="reason-body stack" style="--gap:14px">
+        <p>Приложение для произношения логично просит микрофон, а голос — тоже чувствительные данные. В закрытом тесте микрофон не используется: тренажер сейчас судит по губам. И оценку ставит наша механика сравнения формы движения с целевой, а не языковая модель: она произношение не судит и ваших записей не видит.</p>
+        <p>Звук в продукте будет, это половина разбора. Когда он появится, мы перепишем и эту страницу, и политику, и условия теста раньше, чем включим микрофон.</p>
+      </div>
+    </li>
+
+  </ol>
+</section>
+
+<section class="band-deep section">
+  <div class="shell">
+    <div class="head">
+      <h2>О чем предупреждаем честно</h2>
+      <p class="lead">Обещать больше, чем есть, — плохая идея в любом тексте про приватность. Вот места, где решение зависит от вас.</p>
+    </div>
+    <div class="grid g-2" style="margin-top:32px">
+      <div class="card">
+        <h3>Хранилище браузера не защищено паролем</h3>
+        <p class="muted" style="margin-top:13px">Кто открывает браузер на этом компьютере, тот видит и ваши записи. На общем или рабочем компьютере заходите в тренажер из своего профиля браузера.</p>
+      </div>
+      <div class="card">
+        <h3>Записи не вечные</h3>
+        <p class="muted" style="margin-top:13px">Браузер вправе стереть хранилище сам, если на диске кончается место или сайт давно не открывали — в Safari это неделя. Если записи вам важны, скачайте их файлом.</p>
+      </div>
+      <div class="card">
+        <h3>Скачанный файл — это полная карта лица</h3>
+        <p class="muted" style="margin-top:13px">Так и задумано: файл нужен, чтобы настраивать тренажер. Но как только вы присылаете его нам, данные покидают ваше устройство. Поэтому мы спрашиваем на это отдельное согласие и никогда не берем файл молча.</p>
+      </div>
+      <div class="card">
+        <h3>Пароль в закрытом тесте общий</h3>
+        <p class="muted" style="margin-top:13px">Кто его получил, тот вошел. Отозвать доступ одному человеку нельзя — только сменить пароль всем сразу. Учетные записи появятся вместе с открытым запуском.</p>
+      </div>
+      <div class="card">
+        <h3>Хостинг ведет технические журналы</h3>
+        <p class="muted" style="margin-top:13px">Кто и когда обращался к адресу — обычная практика любого сервера, без нее его не защитить. Эти журналы ведет хостинг-провайдер, и они описаны в политике.</p>
+      </div>
+      <div class="card">
+        <h3>Все это держится на коде</h3>
+        <p class="muted" style="margin-top:13px">Обещания выше — не намерения, а то, как приложение устроено сегодня. Если что-то изменится, мы напишем об этом здесь до того, как изменение доедет до вас.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="shell section-tight" style="max-width:900px">
+  <div class="card card-lilac">
+    <p>Эта страница — пересказ, а не документ. Юридически значимые формулировки лежат в <a href="/privacy/">политике конфиденциальности</a> и в <a href="/terms/">условиях закрытого тестирования</a>; здесь то же самое, но без канцелярита.</p>
+    <p class="small muted" style="margin-top:14px">Сверено с кодом тренажера 12 сентября 2026 года. Остался вопрос про данные — напишите на <a href="mailto:info@bclearlab.ru">info@bclearlab.ru</a>, ответим и дополним страницу.</p>
+  </div>
+</section>
+
+<section class="band-mint cta-band">
+  <div class="shell">
+    <h2>Хотите попробовать первыми?</h2>
+    <p>Доступ открываем небольшими группами, так мы успеваем разговаривать с каждым, кто пришел.</p>
+    <div class="btn-row">
+      <a class="btn btn-ink btn-lg" href="/early-access/">Встать в лист ожидания</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="band-ink site-foot">
+  <div class="shell">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="/assets/logo-full-light.svg" alt="BClear Lab — your AI pronunciation coach" width="295" height="84">
+        <p class="small foot-about">
+          Персональный ИИ-коуч английского произношения. С помощью камеры и микрофона анализирует мимику и звук, помогая убрать акцент и говорить уверенно без стресса.
+</p>
+      </div>
+      <div class="foot-links">
+        <div>
+          <h4>О продукте</h4>
+          <ul>
+            <li><a href="/why/">Зачем произношение</a></li>
+            <li><a href="/method/">Методика</a></li>
+            <li><a href="/how/">Как работает</a></li>
+            <li><a href="/business/">Бизнесу</a></li>
+            <li><a href="/schools/">Школам английского</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Сравнение</h4>
+          <ul>
+            <li><a href="/compare/">Все сравнения</a></li>
+            <li><a href="/compare/#elsa">ELSA Speak</a></li>
+            <li><a href="/compare/#speakerly">Speakerly</a></li>
+            <li><a href="/compare/#boldvoice">BoldVoice</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Материалы</h4>
+          <ul>
+            <li><a href="/blog/">Блог</a></li>
+            <li><a href="/blog/llm-ocenka-proiznosheniya/">LLM и акцент</a></li>
+            <li><a href="/blog/slushay-i-povtoryay/">Тренировка мышц</a></li>
+            <li><a href="/blog/ne-slyshim-beglu-rech/">Восприятие речи</a></li>
+            <li><a href="/blog/anatomiya-akcenta/">Анатомия акцента</a></li>
+            <li><a href="/faq/">Вопросы</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Компания</h4>
+          <ul>
+            <li><a href="/about/">О команде</a></li>
+            <li><a href="/privacy-explained/">Приватность и камера</a></li>
+            <li><a href="/early-access/">Лист ожидания</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Связаться</h4>
+          <ul>
+            <li class="foot-copy"><a href="mailto:info@bclearlab.ru">info@bclearlab.ru</a><button class="copy-btn" type="button" data-copy="info@bclearlab.ru" aria-label="Скопировать почту" title="Скопировать почту"><svg class="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M15 9V6.5A2.5 2.5 0 0 0 12.5 4h-6A2.5 2.5 0 0 0 4 6.5v6A2.5 2.5 0 0 0 6.5 15H9"/></svg><svg class="i-done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7"/></svg></button><span class="copy-note" role="status"></span></li>
+            <li><a href="https://t.me/eri_2410">Telegram</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 BClear Lab. Все права защищены</span>
+      <a href="/privacy/">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/site.js"></script>
+</body>
+</html>
