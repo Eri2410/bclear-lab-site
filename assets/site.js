@@ -167,6 +167,25 @@
     }
   }[document.documentElement.lang === 'en' ? 'en' : 'ru'];
 
+  /* ---- согласие перед письмом: кнопки «Написать нам» на /business и /schools ---- */
+  /* Формы там нет, кнопка сразу открывает письмо с контактами. Без отмеченной
+     галочки письмо не открываем и показываем ту же ошибку, что у листа ожидания. */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-consent-gate]'), function (gate) {
+    var box = gate.querySelector('input[type="checkbox"]');
+    var gateErr = gate.querySelector('.field-err');
+    var clear = function () { gateErr.textContent = ''; box.removeAttribute('aria-invalid'); };
+    box.addEventListener('change', function () { if (box.checked) { clear(); } });
+    Array.prototype.forEach.call(gate.querySelectorAll('a[data-needs-consent]'), function (link) {
+      link.addEventListener('click', function (e) {
+        if (box.checked) { clear(); return; }
+        e.preventDefault();
+        gateErr.textContent = COPY.consentErr;
+        box.setAttribute('aria-invalid', 'true');
+        box.focus();
+      });
+    });
+  });
+
   var form = document.querySelector('form[data-waitlist]');
   if (form) {
     var email = form.querySelector('input[type="email"]');
