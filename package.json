@@ -4,6 +4,7 @@
   "description": "BClear Lab — лендинг тренажёра британского произношения",
   "private": true,
   "scripts": {
-    "build": "node scripts/build.mjs"
+    "build": "node scripts/build.mjs",
+    "build:en": "node scripts/build-en.mjs"
   }
 }

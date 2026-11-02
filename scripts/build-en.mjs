@@ -1,0 +1,82 @@
+// Сборка английского сайта для bclearlab.com (Timeweb Cloud, отдельное приложение Frontend,
+// команда `npm run build:en`, директория сборки /build).
+// Английские страницы из en/ ложатся в корень: en/about/ → bclearlab.com/about/.
+// Русские страницы (политика, согласие, методика, блог) на .com не копируются:
+// ссылки на них ведут на bclearlab.ru.
+import { cpSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import path from 'node:path';
+
+const RU = 'https://bclearlab.ru';
+const EN = 'https://bclearlab.com';
+const APP_EN = 'https://app.bclearlab.com';
+const OUT = 'build';
+
+rmSync(OUT, { recursive: true, force: true });
+mkdirSync(OUT);
+cpSync('assets', `${OUT}/assets`, { recursive: true, filter: (src) => !src.endsWith('.DS_Store') });
+for (const f of ['favicon.ico', 'favicon.png']) cpSync(f, `${OUT}/${f}`);
+
+function rewrite(html) {
+  return (
+    html
+      // 1. Относительные ссылки на русские страницы → полный адрес на bclearlab.ru.
+      //    Ассеты, якоря и английские страницы не трогаем.
+      .replace(/(href)="\/(?!en\/|assets\/|\/)([^"]*)"/g, `$1="${RU}/$2"`)
+      // 2. Английские страницы теперь в корне .com.
+      .replace(/href="\/en\//g, 'href="/')
+      .replace(new RegExp(`${RU}/en/`, 'g'), `${EN}/`)
+      // 3. Картинки для соцсетей и сервис — с .com.
+      .replace(new RegExp(`${RU}/assets/`, 'g'), `${EN}/assets/`)
+      .replace(/https:\/\/app\.bclearlab\.ru\/?/g, `${APP_EN}/`)
+      // 4. Без x-default на русскую главную: на .com по умолчанию английский.
+      .replace(/<link rel="alternate" hreflang="x-default"[^>]*>\n?/g, '')
+  );
+}
+
+const pages = [];
+function walk(dir) {
+  for (const name of readdirSync(dir)) {
+    const src = path.join(dir, name);
+    if (statSync(src).isDirectory()) walk(src);
+    else if (name === 'index.html') {
+      const rel = path.relative('en', dir); // '' для главной
+      const out = path.join(OUT, rel, 'index.html');
+      mkdirSync(path.dirname(out), { recursive: true });
+      writeFileSync(out, rewrite(readFileSync(src, 'utf8')));
+      pages.push(rel ? `/${rel.split(path.sep).join('/')}/` : '/');
+    }
+  }
+}
+walk('en');
+
+// Страница 404 собирается из английской главной: шапка и подвал те же, внутри — короткий текст.
+const home = rewrite(readFileSync('en/index.html', 'utf8'));
+const notFound = home
+  .replace(/<title>[^<]*<\/title>/, '<title>Page not found — BClear Lab</title>')
+  .replace(/<link rel="(canonical|alternate)"[^>]*>\n?/g, '')
+  .replace(/<meta name="description"[^>]*>/, '<meta name="description" content="This page doesn’t exist.">\n<meta name="robots" content="noindex">')
+  .replace(
+    /<main[^>]*>[\s\S]*<\/main>/,
+    `<main id="main">
+<section class="shell page-head">
+  <h1>This page doesn’t exist</h1>
+  <p class="lead">The link may be out of date, or there’s a typo in the address.</p>
+  <div class="btn-row" style="margin-top:30px">
+    <a class="btn btn-primary btn-lg" href="/">Go to the home page</a>
+    <a class="btn btn-ghost btn-lg" href="/early-access/">Join the waitlist</a>
+  </div>
+</section>
+</main>`,
+  );
+writeFileSync(`${OUT}/404.html`, notFound);
+
+writeFileSync(`${OUT}/robots.txt`, `User-agent: *\nAllow: /\n\nSitemap: ${EN}/sitemap.xml\n`);
+writeFileSync(
+  `${OUT}/sitemap.xml`,
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages
+    .sort()
+    .map((p) => `  <url><loc>${EN}${p}</loc></url>`)
+    .join('\n')}\n</urlset>\n`,
+);
+
+console.log(`build/ для bclearlab.com готов: ${pages.length} страниц`);
