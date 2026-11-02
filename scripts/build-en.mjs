@@ -33,6 +33,39 @@ function rewrite(html) {
   );
 }
 
+// На .com нет ничего, что относится к России: ни русских документов (политика, согласие)
+// и галочки согласия, которую требует российский закон, ни ссылок на русский сайт.
+// Что должно стоять на английском вместо документов — решим отдельно.
+// Статья про карьеру построена на российской статистике (hh.ru, Skyeng), на .com её нет.
+const SKIP_PAGES = new Set(['blog/english-for-your-career']);
+const CUTS = [
+  // Переключатель RU в шапке и пометки о русской версии для поисковиков.
+  [/\s*<a class="lang-switch"[^>]*hreflang="ru"[^>]*>[\s\S]*?<\/a>/g, 'RU в шапке'],
+  [/<link rel="alternate" hreflang="(ru|en)"[^>]*>\n?/g, 'hreflang'],
+  // Колонка «In Russian» в подвале.
+  [/<div>\s*<h4>In Russian<\/h4>[\s\S]*?<\/ul>\s*<\/div>\s*/g, 'колонка In Russian'],
+  // Ссылки на политику и согласие внизу страницы.
+  [/\s*<a href="[^"]*\/(privacy|consent)\/" lang="ru">[^<]*<\/a>/g, 'политика и согласие в подвале'],
+  // Галочка согласия в формах вместе с полем для ошибки.
+  [/<label class="check"[^>]*>\s*<input[^>]*>\s*<span>I consent[\s\S]*?<\/label>\s*<p class="field-err" id="(consent|gate)-err"[^>]*><\/p>\s*/g, 'галочка согласия'],
+  // Без галочки кнопке «Write to us» на странице для бизнеса проверять нечего.
+  [/ data-consent-gate| data-needs-consent/g, 'проверка галочки'],
+  // Блок «More detail, in Russian» со ссылками на русские страницы.
+  [/<section class="band-deep section-tight">\s*<div class="shell">\s*<div class="head">\s*<h2>More detail, in Russian<\/h2>[\s\S]*?<\/section>\s*/g, 'блок More detail, in Russian'],
+  // Ссылка «Read more» на статью про карьеру.
+  [/\s*<a class="goal-more" href="\/blog\/english-for-your-career\/"[^>]*>[^<]*<\/a>/g, 'Read more на статью'],
+];
+const cutCount = new Map(CUTS.map(([, name]) => [name, 0]));
+function cutRussia(html) {
+  for (const [re, name] of CUTS) {
+    html = html.replace(re, () => {
+      cutCount.set(name, cutCount.get(name) + 1);
+      return '';
+    });
+  }
+  return html;
+}
+
 const pages = [];
 function walk(dir) {
   for (const name of readdirSync(dir)) {
@@ -40,9 +73,10 @@ function walk(dir) {
     if (statSync(src).isDirectory()) walk(src);
     else if (name === 'index.html') {
       const rel = path.relative('en', dir); // '' для главной
+      if (SKIP_PAGES.has(rel.split(path.sep).join('/'))) continue;
       const out = path.join(OUT, rel, 'index.html');
       mkdirSync(path.dirname(out), { recursive: true });
-      writeFileSync(out, rewrite(readFileSync(src, 'utf8')));
+      writeFileSync(out, cutRussia(rewrite(readFileSync(src, 'utf8'))));
       pages.push(rel ? `/${rel.split(path.sep).join('/')}/` : '/');
     }
   }
@@ -50,7 +84,7 @@ function walk(dir) {
 walk('en');
 
 // Страница 404 собирается из английской главной: шапка и подвал те же, внутри — короткий текст.
-const home = rewrite(readFileSync('en/index.html', 'utf8'));
+const home = cutRussia(rewrite(readFileSync('en/index.html', 'utf8')));
 const notFound = home
   .replace(/<title>[^<]*<\/title>/, '<title>Page not found — BClear Lab</title>')
   .replace(/<link rel="(canonical|alternate)"[^>]*>\n?/g, '')
@@ -78,5 +112,10 @@ writeFileSync(
     .map((p) => `  <url><loc>${EN}${p}</loc></url>`)
     .join('\n')}\n</urlset>\n`,
 );
+
+// Если разметка страниц поменялась и какое-то правило перестало срабатывать, сборка падает:
+// иначе русские документы молча вернутся на .com.
+const missed = [...cutCount].filter(([, n]) => n === 0).map(([name]) => name);
+if (missed.length) throw new Error(`Не сработали правила вырезки: ${missed.join(', ')}`);
 
 console.log(`build/ для bclearlab.com готов: ${pages.length} страниц`);
