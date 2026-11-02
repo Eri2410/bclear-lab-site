@@ -84,19 +84,25 @@ function walk(dir) {
 }
 walk('en');
 
-// Своя английская политика (текст — scripts/en-privacy.html), без российских требований.
-// Шапка и подвал — со страницы about, у неё же меняем заголовок, описание и адреса.
+// Свои английские документы без российских требований: политика (scripts/en-privacy.html)
+// и условия закрытой беты (scripts/en-terms.html). Шапка и подвал — со страницы about,
+// у неё же меняем заголовок, описание и адреса.
 const about = cutRussia(rewrite(readFileSync('en/about/index.html', 'utf8')));
-const privacyDesc = 'What BClear Lab receives, why, who helps us process it, and how to have it deleted. Your camera video never leaves your device.';
-const privacy = about
-  .replace(/About me — BClear Lab/g, 'Privacy Policy — BClear Lab')
-  .replace(/(<meta (?:name|property)="(?:description|og:description|twitter:description)" content=")[^"]*"/g, `$1${privacyDesc}"`)
-  .replace(new RegExp(`${EN}/about/`, 'g'), `${EN}/privacy/`)
-  .replace(' aria-current="page"', '')
-  .replace(/<main[^>]*>[\s\S]*<\/main>/, () => readFileSync('scripts/en-privacy.html', 'utf8').replace(/^<!--[\s\S]*?-->\n/, '').trim());
-mkdirSync(`${OUT}/privacy`, { recursive: true });
-writeFileSync(`${OUT}/privacy/index.html`, privacy);
-pages.push('/privacy/');
+function docPage(slug, file, title, desc) {
+  const html = about
+    .replace(/About me — BClear Lab/g, `${title} — BClear Lab`)
+    .replace(/(<meta (?:name|property)="(?:description|og:description|twitter:description)" content=")[^"]*"/g, `$1${desc}"`)
+    .replace(new RegExp(`${EN}/about/`, 'g'), `${EN}/${slug}/`)
+    .replace(' aria-current="page"', '')
+    .replace(/<main[^>]*>[\s\S]*<\/main>/, () => readFileSync(file, 'utf8').replace(/^<!--[\s\S]*?-->\n/, '').trim());
+  mkdirSync(`${OUT}/${slug}`, { recursive: true });
+  writeFileSync(`${OUT}/${slug}/index.html`, html);
+  pages.push(`/${slug}/`);
+}
+docPage('privacy', 'scripts/en-privacy.html', 'Privacy Policy',
+  'What BClear Lab receives, why, who helps us process it, and how to have it deleted. Your camera video never leaves your device.');
+docPage('terms', 'scripts/en-terms.html', 'Closed Beta Terms',
+  'The rules for using the free test version of BClear Lab, the British pronunciation coach.');
 
 // Страница 404 собирается из английской главной: шапка и подвал те же, внутри — короткий текст.
 const home = cutRussia(rewrite(readFileSync('en/index.html', 'utf8')));
