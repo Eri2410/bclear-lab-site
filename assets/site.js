@@ -304,7 +304,7 @@ if (location.hostname.replace(/^www\./, '') === 'bclearlab.ru' && location.pathn
     bar.setAttribute('role', 'region');
     bar.setAttribute('aria-label', isEn ? 'Cookie notice' : 'Уведомление о cookie');
     bar.innerHTML = isEn
-      ? '<p>We use cookies to improve the site. Details are in our <a href="/privacy/" lang="ru">privacy policy (in Russian)</a>.</p>'
+      ? '<p>We use cookies to improve the site. Details are in our <a href="/privacy/">privacy policy</a>.</p>'
         + '<button class="btn btn-primary" type="button">Got it</button>'
       : '<p>Мы используем cookie, чтобы улучшать сайт. Подробнее — в <a href="/privacy/">политике конфиденциальности</a>.</p>'
         + '<button class="btn btn-primary" type="button">Понятно</button>';

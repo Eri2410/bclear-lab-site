@@ -44,8 +44,9 @@ const CUTS = [
   [/<link rel="alternate" hreflang="(ru|en)"[^>]*>\n?/g, 'hreflang'],
   // Колонка «In Russian» в подвале.
   [/<div>\s*<h4>In Russian<\/h4>[\s\S]*?<\/ul>\s*<\/div>\s*/g, 'колонка In Russian'],
-  // Ссылки на политику и согласие внизу страницы.
-  [/\s*<a href="[^"]*\/(privacy|consent)\/" lang="ru">[^<]*<\/a>/g, 'политика и согласие в подвале'],
+  // Русские политика и согласие внизу страницы → своя английская политика.
+  [/<a href="[^"]*\/privacy\/" lang="ru">[^<]*<\/a>/g, 'политика в подвале', '<a href="/privacy/">Privacy policy</a>'],
+  [/\s*<a href="[^"]*\/consent\/" lang="ru">[^<]*<\/a>/g, 'согласие в подвале'],
   // Галочка согласия в формах вместе с полем для ошибки.
   [/<label class="check"[^>]*>\s*<input[^>]*>\s*<span>I consent[\s\S]*?<\/label>\s*<p class="field-err" id="(consent|gate)-err"[^>]*><\/p>\s*/g, 'галочка согласия'],
   // Без галочки кнопке «Write to us» на странице для бизнеса проверять нечего.
@@ -57,10 +58,10 @@ const CUTS = [
 ];
 const cutCount = new Map(CUTS.map(([, name]) => [name, 0]));
 function cutRussia(html) {
-  for (const [re, name] of CUTS) {
+  for (const [re, name, to = ''] of CUTS) {
     html = html.replace(re, () => {
       cutCount.set(name, cutCount.get(name) + 1);
-      return '';
+      return to;
     });
   }
   return html;
@@ -82,6 +83,20 @@ function walk(dir) {
   }
 }
 walk('en');
+
+// Своя английская политика (текст — scripts/en-privacy.html), без российских требований.
+// Шапка и подвал — со страницы about, у неё же меняем заголовок, описание и адреса.
+const about = cutRussia(rewrite(readFileSync('en/about/index.html', 'utf8')));
+const privacyDesc = 'What BClear Lab receives, why, who helps us process it, and how to have it deleted. Your camera video never leaves your device.';
+const privacy = about
+  .replace(/About me — BClear Lab/g, 'Privacy Policy — BClear Lab')
+  .replace(/(<meta (?:name|property)="(?:description|og:description|twitter:description)" content=")[^"]*"/g, `$1${privacyDesc}"`)
+  .replace(new RegExp(`${EN}/about/`, 'g'), `${EN}/privacy/`)
+  .replace(' aria-current="page"', '')
+  .replace(/<main[^>]*>[\s\S]*<\/main>/, () => readFileSync('scripts/en-privacy.html', 'utf8').replace(/^<!--[\s\S]*?-->\n/, '').trim());
+mkdirSync(`${OUT}/privacy`, { recursive: true });
+writeFileSync(`${OUT}/privacy/index.html`, privacy);
+pages.push('/privacy/');
 
 // Страница 404 собирается из английской главной: шапка и подвал те же, внутри — короткий текст.
 const home = cutRussia(rewrite(readFileSync('en/index.html', 'utf8')));
