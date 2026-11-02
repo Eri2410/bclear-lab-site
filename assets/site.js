@@ -1,3 +1,8 @@
+// Английская версия живёт на bclearlab.com: старые адреса bclearlab.ru/en/… ведём туда же.
+if (location.hostname.replace(/^www\./, '') === 'bclearlab.ru' && location.pathname.indexOf('/en/') === 0) {
+  location.replace('https://bclearlab.com' + location.pathname.slice(3) + location.search + location.hash);
+}
+
 (function () {
   'use strict';
 
